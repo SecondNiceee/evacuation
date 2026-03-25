@@ -79,58 +79,214 @@ export const hero = {
   ]
 }
 
-export const service = {
-  name: 'service',
-  title: 'Услуги',
+// Секция Услуги - singleton с заголовком и массивом услуг
+export const servicesSection = {
+  name: 'servicesSection',
+  title: 'Секция Услуги',
   type: 'document',
   fields: [
-    {
-      name: 'icon',
-      title: 'Иконка',
+    { 
+      name: 'sectionTitle', 
+      title: 'Заголовок секции', 
       type: 'string',
-      options: { list: ['car', 'truck', 'alertTriangle', 'route'] }
+      initialValue: 'Наши услуги'
     },
-    { name: 'title', title: 'Название', type: 'string' },
-    { name: 'description', title: 'Описание', type: 'text' },
-    { name: 'price', title: 'Цена', type: 'string' },
-    { name: 'image', title: 'Изображение', type: 'image' },
-    { name: 'orderUrl', title: 'Ссылка для заказа', type: 'url' },
-    { name: 'order', title: 'Порядок', type: 'number' }
+    { 
+      name: 'sectionSubtitle', 
+      title: 'Подзаголовок секции', 
+      type: 'string',
+      initialValue: 'Полный спектр услуг эвакуации'
+    },
+    {
+      name: 'services',
+      title: 'Услуги',
+      type: 'array',
+      of: [{
+        type: 'object',
+        name: 'serviceItem',
+        title: 'Услуга',
+        fields: [
+          {
+            name: 'icon',
+            title: 'Иконка',
+            type: 'string',
+            options: { list: ['car', 'truck', 'alertTriangle', 'route'] }
+          },
+          { name: 'title', title: 'Название', type: 'string' },
+          { name: 'description', title: 'Описание', type: 'text' },
+          { name: 'price', title: 'Цена', type: 'string' },
+          { name: 'image', title: 'Изображение', type: 'image' },
+          { name: 'orderUrl', title: 'Ссылка для заказа', type: 'url' }
+        ],
+        preview: {
+          select: { title: 'title', subtitle: 'price' }
+        }
+      }],
+      initialValue: [
+        {
+          icon: 'car',
+          title: 'Легковые автомобили',
+          description: 'Эвакуация седанов, хэтчбеков, универсалов. Бережная погрузка и доставка.',
+          price: 'от 2500 ₽',
+          orderUrl: 'https://t.me/evacuator31bot'
+        },
+        {
+          icon: 'truck',
+          title: 'Внедорожники и кроссоверы',
+          description: 'Эвакуация тяжёлых автомобилей с полным приводом.',
+          price: 'от 3000 ₽',
+          orderUrl: 'https://t.me/evacuator31bot'
+        },
+        {
+          icon: 'alertTriangle',
+          title: 'Аварийная эвакуация',
+          description: 'Срочный выезд на место ДТП. Работаем со страховыми.',
+          price: 'от 2500 ₽',
+          orderUrl: 'https://t.me/evacuator31bot'
+        },
+        {
+          icon: 'route',
+          title: 'Межгород',
+          description: 'Доставка автомобиля в другой город. Отслеживание онлайн.',
+          price: 'от 35 ₽/км',
+          orderUrl: 'https://t.me/evacuator31bot'
+        }
+      ]
+    }
   ]
 }
 
-export const benefit = {
-  name: 'benefit',
-  title: 'Преимущества',
+// Секция Преимущества - singleton с заголовком и массивом преимуществ
+export const benefitsSection = {
+  name: 'benefitsSection',
+  title: 'Секция Преимущества',
   type: 'document',
   fields: [
-    {
-      name: 'icon',
-      title: 'Иконка',
+    { 
+      name: 'sectionTitle', 
+      title: 'Заголовок секции', 
       type: 'string',
-      options: { list: ['messageSquare', 'dollarSign', 'shield', 'wrench'] }
+      initialValue: 'Почему выбирают нас'
     },
-    { name: 'title', title: 'Название', type: 'string' },
-    { name: 'description', title: 'Описание', type: 'text' },
-    { name: 'order', title: 'Порядок', type: 'number' }
+    { 
+      name: 'sectionSubtitle', 
+      title: 'Подзаголовок секции', 
+      type: 'string',
+      initialValue: 'Преимущества работы с нами'
+    },
+    {
+      name: 'benefits',
+      title: 'Преимущества',
+      type: 'array',
+      of: [{
+        type: 'object',
+        name: 'benefitItem',
+        title: 'Преимущество',
+        fields: [
+          {
+            name: 'icon',
+            title: 'Иконка',
+            type: 'string',
+            options: { list: ['messageSquare', 'dollarSign', 'shield', 'wrench'] }
+          },
+          { name: 'title', title: 'Название', type: 'string' },
+          { name: 'description', title: 'Описание', type: 'text' }
+        ],
+        preview: {
+          select: { title: 'title' }
+        }
+      }],
+      initialValue: [
+        {
+          icon: 'messageSquare',
+          title: 'Удобный заказ',
+          description: 'Заказывайте через Telegram-бот — без звонков и ожидания на линии.'
+        },
+        {
+          icon: 'dollarSign',
+          title: 'Честные цены',
+          description: 'Фиксированная стоимость. Никаких скрытых платежей и накруток.'
+        },
+        {
+          icon: 'shield',
+          title: 'Бережная погрузка',
+          description: 'Современное оборудование. Ваш автомобиль в безопасности.'
+        },
+        {
+          icon: 'wrench',
+          title: 'Техпомощь на месте',
+          description: 'Мелкий ремонт, подзарядка аккумулятора, подвоз топлива.'
+        }
+      ]
+    }
   ]
 }
 
-export const step = {
-  name: 'step',
-  title: 'Как это работает',
+// Секция Как это работает - singleton с заголовком и массивом шагов
+export const stepsSection = {
+  name: 'stepsSection',
+  title: 'Секция Как это работает',
   type: 'document',
   fields: [
-    { name: 'num', title: 'Номер шага', type: 'string' },
-    {
-      name: 'icon',
-      title: 'Иконка',
+    { 
+      name: 'sectionTitle', 
+      title: 'Заголовок секции', 
       type: 'string',
-      options: { list: ['fileText', 'calculator', 'truck'] }
+      initialValue: 'Как это работает'
     },
-    { name: 'title', title: 'Название', type: 'string' },
-    { name: 'description', title: 'Описание', type: 'text' },
-    { name: 'order', title: 'Порядок', type: 'number' }
+    { 
+      name: 'sectionSubtitle', 
+      title: 'Подзаголовок секции', 
+      type: 'string',
+      initialValue: 'Три простых шага'
+    },
+    {
+      name: 'steps',
+      title: 'Шаги',
+      type: 'array',
+      of: [{
+        type: 'object',
+        name: 'stepItem',
+        title: 'Шаг',
+        fields: [
+          { name: 'num', title: 'Номер шага', type: 'string' },
+          {
+            name: 'icon',
+            title: 'Иконка',
+            type: 'string',
+            options: { list: ['fileText', 'calculator', 'truck'] }
+          },
+          { name: 'title', title: 'Название', type: 'string' },
+          { name: 'description', title: 'Описание', type: 'text' }
+        ],
+        preview: {
+          select: { title: 'title', num: 'num' },
+          prepare({ title, num }: { title: string; num: string }) {
+            return { title: `${num}. ${title}` }
+          }
+        }
+      }],
+      initialValue: [
+        {
+          num: '01',
+          icon: 'fileText',
+          title: 'Оставьте заявку',
+          description: 'Напишите боту в Telegram или VK. Укажите адрес и тип авто.'
+        },
+        {
+          num: '02',
+          icon: 'calculator',
+          title: 'Получите расчёт',
+          description: 'Бот автоматически рассчитает стоимость и время подачи.'
+        },
+        {
+          num: '03',
+          icon: 'truck',
+          title: 'Дождитесь эвакуатор',
+          description: 'Водитель приедет в указанное время и доставит авто.'
+        }
+      ]
+    }
   ]
 }
 
@@ -156,7 +312,7 @@ export const notice = {
 
 export const pricing = {
   name: 'pricing',
-  title: 'Цены',
+  title: 'Секция Цены',
   type: 'document',
   fields: [
     { 
@@ -189,15 +345,19 @@ export const pricing = {
       type: 'array',
       of: [{
         type: 'object',
+        name: 'planItem',
+        title: 'Тариф',
         fields: [
           { name: 'name', title: 'Название тарифа', type: 'string' },
           { name: 'price', title: 'Цена', type: 'string' },
           { name: 'features', title: 'Особенности', type: 'array', of: [{ type: 'string' }] },
           { name: 'cta', title: 'Текст кнопки', type: 'string' },
           { name: 'href', title: 'Ссылка кнопки', type: 'url' },
-          { name: 'highlight', title: 'Выделить (популярный)', type: 'boolean' },
-          { name: 'order', title: 'Порядок', type: 'number' }
-        ]
+          { name: 'highlight', title: 'Выделить (популярный)', type: 'boolean' }
+        ],
+        preview: {
+          select: { title: 'name', subtitle: 'price' }
+        }
       }],
       initialValue: [
         {
@@ -206,8 +366,7 @@ export const pricing = {
           features: ['Подача от 15 минут', 'Фиксированная цена', 'Любой тип авто'],
           cta: 'Заказать',
           href: 'https://t.me/evacuator31bot',
-          highlight: false,
-          order: 1
+          highlight: false
         },
         {
           name: 'Межгород',
@@ -215,8 +374,7 @@ export const pricing = {
           features: ['Доставка в другой город', 'Страховка груза', 'Отслеживание онлайн'],
           cta: 'Рассчитать',
           href: 'https://t.me/evacuator31bot',
-          highlight: true,
-          order: 2
+          highlight: true
         },
         {
           name: 'Спецтехника',
@@ -224,8 +382,7 @@ export const pricing = {
           features: ['Погрузчики, тракторы', 'Мощный эвакуатор', 'Опытные водители'],
           cta: 'Уточнить',
           href: 'https://t.me/evacuator31bot',
-          highlight: false,
-          order: 3
+          highlight: false
         }
       ]
     }
@@ -234,7 +391,7 @@ export const pricing = {
 
 export const zone = {
   name: 'zone',
-  title: 'Зона работы',
+  title: 'Секция Зона работы',
   type: 'document',
   fields: [
     { 
@@ -257,7 +414,10 @@ export const zone = {
         type: 'object',
         fields: [
           { name: 'text', title: 'Текст', type: 'string' }
-        ]
+        ],
+        preview: {
+          select: { title: 'text' }
+        }
       }],
       initialValue: [
         { text: 'Белгород и пригород' },
@@ -295,7 +455,7 @@ export const zone = {
 
 export const contactsSection = {
   name: 'contactsSection',
-  title: 'Контакты',
+  title: 'Секция Контакты',
   type: 'document',
   fields: [
     { 
@@ -340,6 +500,8 @@ export const contactsSection = {
       type: 'array',
       of: [{
         type: 'object',
+        name: 'contactItem',
+        title: 'Контакт',
         fields: [
           {
             name: 'platform',
@@ -349,45 +511,93 @@ export const contactsSection = {
           },
           { name: 'title', title: 'Название', type: 'string' },
           { name: 'description', title: 'Описание', type: 'text' },
-          { name: 'url', title: 'Ссылка', type: 'url' },
-          { name: 'order', title: 'Порядок', type: 'number' }
-        ]
+          { name: 'url', title: 'Ссылка', type: 'url' }
+        ],
+        preview: {
+          select: { title: 'title', subtitle: 'platform' }
+        }
       }],
       initialValue: [
         {
           platform: 'telegram',
           title: 'Telegram',
           description: 'Быстрый заказ через бота',
-          url: 'https://t.me/evacuator31bot',
-          order: 1
+          url: 'https://t.me/evacuator31bot'
         },
         {
           platform: 'vk',
           title: 'ВКонтакте',
           description: 'Сообщество и поддержка',
-          url: 'https://vk.me/evacuator31bot',
-          order: 2
+          url: 'https://vk.me/evacuator31bot'
         },
         {
           platform: 'max',
           title: 'Max',
           description: 'Альтернативный мессенджер',
-          url: 'https://max.com/evacuator31bot',
-          order: 3
+          url: 'https://max.com/evacuator31bot'
         }
       ]
     }
   ]
 }
 
-export const faq = {
-  name: 'faq',
-  title: 'Частые вопросы',
+// Секция FAQ - singleton с заголовком и массивом вопросов
+export const faqSection = {
+  name: 'faqSection',
+  title: 'Секция FAQ',
   type: 'document',
   fields: [
-    { name: 'question', title: 'Вопрос', type: 'string' },
-    { name: 'answer', title: 'Ответ', type: 'text' },
-    { name: 'order', title: 'Порядок', type: 'number' }
+    { 
+      name: 'sectionTitle', 
+      title: 'Заголовок секции', 
+      type: 'string',
+      initialValue: 'Частые вопросы'
+    },
+    { 
+      name: 'sectionSubtitle', 
+      title: 'Подзаголовок секции', 
+      type: 'string',
+      initialValue: 'Ответы на популярные вопросы'
+    },
+    {
+      name: 'faqs',
+      title: 'Вопросы и ответы',
+      type: 'array',
+      of: [{
+        type: 'object',
+        name: 'faqItem',
+        title: 'Вопрос',
+        fields: [
+          { name: 'question', title: 'Вопрос', type: 'string' },
+          { name: 'answer', title: 'Ответ', type: 'text' }
+        ],
+        preview: {
+          select: { title: 'question' }
+        }
+      }],
+      initialValue: [
+        {
+          question: 'Как быстро приедет эвакуатор?',
+          answer: 'В черте города — от 15 до 40 минут. За городом время зависит от расстояния.'
+        },
+        {
+          question: 'Можно ли заказать эвакуатор ночью?',
+          answer: 'Да, мы работаем круглосуточно, без выходных и праздников.'
+        },
+        {
+          question: 'Как оплатить услугу?',
+          answer: 'Наличными водителю или переводом на карту. Выдаём чек.'
+        },
+        {
+          question: 'Эвакуируете ли вы мотоциклы?',
+          answer: 'Да, у нас есть специальное оборудование для безопасной перевозки мотоциклов.'
+        },
+        {
+          question: 'Что делать, если машина заблокирована?',
+          answer: 'Наши водители имеют опыт работы с заблокированными автомобилями. Погрузим аккуратно.'
+        }
+      ]
+    }
   ]
 }
 
@@ -511,7 +721,10 @@ export const navbar = {
         fields: [
           { name: 'label', title: 'Название', type: 'string' },
           { name: 'href', title: 'Ссылка', type: 'string' }
-        ]
+        ],
+        preview: {
+          select: { title: 'label', subtitle: 'href' }
+        }
       }],
       initialValue: [
         { label: 'Услуги', href: '#services' },
@@ -554,14 +767,14 @@ export const siteSettings = {
 // Export all schemas
 export const schemaTypes = [
   hero,
-  service,
-  benefit,
-  step,
+  servicesSection,
+  benefitsSection,
+  stepsSection,
   notice,
   pricing,
   zone,
   contactsSection,
-  faq,
+  faqSection,
   cta,
   footer,
   navbar,

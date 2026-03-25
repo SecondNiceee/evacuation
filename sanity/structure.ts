@@ -1,57 +1,26 @@
 import type { StructureBuilder } from 'sanity/structure'
 
-// Singleton document types - only one instance allowed
+// All document types are now singletons
 const singletonTypes = [
   'hero',
+  'servicesSection',
+  'benefitsSection',
+  'stepsSection',
   'notice',
   'pricing',
   'zone',
   'contactsSection',
+  'faqSection',
   'cta',
   'footer',
   'navbar',
   'siteSettings',
 ]
 
-// Singleton document IDs
-const singletonIds = {
-  hero: 'hero',
-  notice: 'notice',
-  pricing: 'pricing',
-  zone: 'zone',
-  contactsSection: 'contactsSection',
-  cta: 'cta',
-  footer: 'footer',
-  navbar: 'navbar',
-  siteSettings: 'siteSettings',
-}
-
-// Titles for singleton documents
-const singletonTitles: Record<string, string> = {
-  hero: 'Главный экран',
-  notice: 'Блок уведомления',
-  pricing: 'Цены',
-  zone: 'Зона работы',
-  contactsSection: 'Контакты',
-  cta: 'Призыв к действию',
-  footer: 'Подвал сайта',
-  navbar: 'Навигация',
-  siteSettings: 'Настройки сайта',
-}
-
-// List document types (multiple instances allowed)
-const listTypes = [
-  { type: 'service', title: 'Услуги' },
-  { type: 'benefit', title: 'Преимущества' },
-  { type: 'step', title: 'Как это работает' },
-  { type: 'faq', title: 'Частые вопросы' },
-]
-
 export const structure = (S: StructureBuilder) =>
   S.list()
     .title('Контент сайта')
     .items([
-      // Singleton documents
       S.listItem()
         .title('Настройки сайта')
         .id('siteSettings')
@@ -81,13 +50,33 @@ export const structure = (S: StructureBuilder) =>
             .title('Главный экран')
         ),
       S.divider(),
-      // List documents
-      ...listTypes.map(({ type, title }) =>
-        S.listItem()
-          .title(title)
-          .schemaType(type)
-          .child(S.documentTypeList(type).title(title))
-      ),
+      S.listItem()
+        .title('Секция Услуги')
+        .id('servicesSection')
+        .child(
+          S.document()
+            .schemaType('servicesSection')
+            .documentId('servicesSection')
+            .title('Секция Услуги')
+        ),
+      S.listItem()
+        .title('Секция Преимущества')
+        .id('benefitsSection')
+        .child(
+          S.document()
+            .schemaType('benefitsSection')
+            .documentId('benefitsSection')
+            .title('Секция Преимущества')
+        ),
+      S.listItem()
+        .title('Секция Как это работает')
+        .id('stepsSection')
+        .child(
+          S.document()
+            .schemaType('stepsSection')
+            .documentId('stepsSection')
+            .title('Секция Как это работает')
+        ),
       S.divider(),
       S.listItem()
         .title('Блок уведомления')
@@ -99,31 +88,40 @@ export const structure = (S: StructureBuilder) =>
             .title('Блок уведомления')
         ),
       S.listItem()
-        .title('Цены')
+        .title('Секция Цены')
         .id('pricing')
         .child(
           S.document()
             .schemaType('pricing')
             .documentId('pricing')
-            .title('Цены')
+            .title('Секция Цены')
         ),
       S.listItem()
-        .title('Зона работы')
+        .title('Секция Зона работы')
         .id('zone')
         .child(
           S.document()
             .schemaType('zone')
             .documentId('zone')
-            .title('Зона работы')
+            .title('Секция Зона работы')
         ),
       S.listItem()
-        .title('Контакты')
+        .title('Секция Контакты')
         .id('contactsSection')
         .child(
           S.document()
             .schemaType('contactsSection')
             .documentId('contactsSection')
-            .title('Контакты')
+            .title('Секция Контакты')
+        ),
+      S.listItem()
+        .title('Секция FAQ')
+        .id('faqSection')
+        .child(
+          S.document()
+            .schemaType('faqSection')
+            .documentId('faqSection')
+            .title('Секция FAQ')
         ),
       S.divider(),
       S.listItem()
@@ -146,7 +144,7 @@ export const structure = (S: StructureBuilder) =>
         ),
     ])
 
-// Filter out singleton types from the global "New document" menu
+// Filter out duplicate action for singletons
 export const singletonActions = (prev: any, context: any) => {
   if (singletonTypes.includes(context.schemaType)) {
     return prev.filter((action: any) => action.action !== 'duplicate')
@@ -154,7 +152,7 @@ export const singletonActions = (prev: any, context: any) => {
   return prev
 }
 
-// Hide singleton types from the global "Create" menu
+// Hide all types from the global "Create" menu since all are singletons
 export const newDocumentOptions = (prev: any) => {
   return prev.filter((item: any) => !singletonTypes.includes(item.templateId))
 }
