@@ -1,0 +1,1373 @@
+[
+  {
+    "fields": [
+      {
+        "initialValue": "Эвакуация авто в Белгороде — быстро, надёжно, выгодно",
+        "name": "title",
+        "type": "string",
+        "title": "Заголовок"
+      },
+      {
+        "initialValue": "быстро",
+        "name": "titleHighlight1",
+        "type": "string",
+        "title": "Выделенное слово 1 (зелёное)"
+      },
+      {
+        "initialValue": "выгодно",
+        "name": "titleHighlight2",
+        "type": "string",
+        "title": "Выделенное слово 2 (оранжевое)"
+      },
+      {
+        "initialValue": "Подаём эвакуатор за 15–40 минут в любую точку города. Работаем с легковыми авто, внедорожниками, мотоциклами и спецтехникой.",
+        "name": "subtitle",
+        "type": "text",
+        "title": "Подзаголовок"
+      },
+      {
+        "initialValue": "Эвакуация 24/7",
+        "name": "tagText",
+        "type": "string",
+        "title": "Текст метки"
+      },
+      {
+        "name": "heroImage",
+        "type": "image",
+        "title": "Фоновое изображение"
+      },
+      {
+        "initialValue": [
+          {
+            "icon": "Часы",
+            "text": "Подача от 15 мин"
+          },
+          {
+            "icon": "Метка на карте",
+            "text": "По всей области"
+          },
+          {
+            "icon": "Робот",
+            "text": "Онлайн-заказ"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Часы",
+                      "value": "Часы"
+                    },
+                    {
+                      "title": "Метка на карте",
+                      "value": "Метка на карте"
+                    },
+                    {
+                      "title": "Робот",
+                      "value": "Робот"
+                    },
+                    {
+                      "title": "Телефон",
+                      "value": "Телефон"
+                    },
+                    {
+                      "title": "Звезда",
+                      "value": "Звезда"
+                    },
+                    {
+                      "title": "Сердце",
+                      "value": "Сердце"
+                    },
+                    {
+                      "title": "Щит",
+                      "value": "Щит"
+                    },
+                    {
+                      "title": "Галочка",
+                      "value": "Галочка"
+                    }
+                  ]
+                },
+                "name": "icon",
+                "type": "string",
+                "title": "Иконка"
+              },
+              {
+                "name": "text",
+                "type": "string",
+                "title": "Текст"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "badges",
+        "type": "array",
+        "title": "Значки"
+      }
+    ],
+    "name": "hero",
+    "type": "document",
+    "title": "Главный экран"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Услуги",
+        "name": "sectionLabel",
+        "type": "string",
+        "title": "Метка секции"
+      },
+      {
+        "initialValue": "Эвакуируем спецтехнику под ваши задачи",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Заголовок секции"
+      },
+      {
+        "initialValue": [
+          {
+            "icon": "Легковой автомобиль",
+            "title": "Легковые автомобили",
+            "description": "До 2,5 тонн. Аккуратная погрузка, фиксация колёс, страховка груза.",
+            "price": "От 2 500 ₽",
+            "orderUrl": "https://t.me/evacuator31bot"
+          },
+          {
+            "icon": "Грузовик",
+            "title": "Грузовые и микроавтобусы",
+            "description": "До 10 тонн. Манипуляторы, низкорамные платформы, работа с негабаритом.",
+            "price": "От 4 500 ₽",
+            "orderUrl": "https://t.me/evacuator31bot"
+          },
+          {
+            "icon": "Предупреждение",
+            "title": "После ДТП и сложные случаи",
+            "description": "Вытаскиваем из кювета, сугробов, парковок. Работаем со страховыми.",
+            "price": "Расчёт индивидуально",
+            "orderUrl": "https://t.me/evacuator31bot"
+          },
+          {
+            "icon": "Маршрут",
+            "title": "Междугородняя эвакуация",
+            "description": "Доставка по Белгородской области и РФ. Прозрачный тариф за км.",
+            "price": "От 50 ₽/км",
+            "orderUrl": "https://t.me/evacuator31bot"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Легковой автомобиль",
+                      "value": "Легковой автомобиль"
+                    },
+                    {
+                      "title": "Грузовик",
+                      "value": "Грузовик"
+                    },
+                    {
+                      "title": "Предупреждение",
+                      "value": "Предупреждение"
+                    },
+                    {
+                      "title": "Маршрут",
+                      "value": "Маршрут"
+                    },
+                    {
+                      "title": "Ключ",
+                      "value": "Ключ"
+                    },
+                    {
+                      "title": "Щит",
+                      "value": "Щит"
+                    }
+                  ]
+                },
+                "name": "icon",
+                "type": "string",
+                "title": "Иконка"
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Название"
+              },
+              {
+                "name": "description",
+                "type": "text",
+                "title": "Описание"
+              },
+              {
+                "name": "price",
+                "type": "string",
+                "title": "Цена"
+              },
+              {
+                "name": "image",
+                "type": "image",
+                "title": "Изображение"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "orderUrl",
+                "type": "url",
+                "title": "Ссылка для заказа"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Карточки услуг"
+      }
+    ],
+    "name": "servicesSection",
+    "type": "document",
+    "title": "Секция услуг"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Почему мы",
+        "name": "sectionLabel",
+        "type": "string",
+        "title": "Метка секции"
+      },
+      {
+        "initialValue": "Мы сохраним ваши нервы и время",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Заголовок секции"
+      },
+      {
+        "initialValue": [
+          {
+            "icon": "Сообщение",
+            "title": "Удобный заказ",
+            "description": "Никаких колл-центров — напишите в VK, Max или создайте заявку через Telegram-бота."
+          },
+          {
+            "icon": "Доллар",
+            "title": "Честная цена",
+            "description": "Фикс в момент заказа, без «накруток на месте». Итоговая цена фиксируется до выезда."
+          },
+          {
+            "icon": "Щит",
+            "title": "Ответственность",
+            "description": "Договор, фотофиксация авто до погрузки, страховка груза на весь маршрут."
+          },
+          {
+            "icon": "Гаечный ключ",
+            "title": "Опыт",
+            "description": "Водители со стажем 5+ лет, спецоснащение для сложных случаев и ДТП."
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Сообщение",
+                      "value": "Сообщение"
+                    },
+                    {
+                      "title": "Доллар",
+                      "value": "Доллар"
+                    },
+                    {
+                      "title": "Щит",
+                      "value": "Щит"
+                    },
+                    {
+                      "title": "Гаечный ключ",
+                      "value": "Гаечный ключ"
+                    },
+                    {
+                      "title": "Звезда",
+                      "value": "Звезда"
+                    },
+                    {
+                      "title": "Сердце",
+                      "value": "Сердце"
+                    },
+                    {
+                      "title": "Часы",
+                      "value": "Часы"
+                    },
+                    {
+                      "title": "Галочка",
+                      "value": "Галочка"
+                    }
+                  ]
+                },
+                "name": "icon",
+                "type": "string",
+                "title": "Иконка"
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Название"
+              },
+              {
+                "name": "description",
+                "type": "text",
+                "title": "Описание"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Карточки преимуществ"
+      }
+    ],
+    "name": "benefitsSection",
+    "type": "document",
+    "title": "Секция преимуществ"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Как работаем",
+        "name": "sectionLabel",
+        "type": "string",
+        "title": "Метка секции"
+      },
+      {
+        "initialValue": "3 шага до эвакуации",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Заголовок секции"
+      },
+      {
+        "initialValue": [
+          {
+            "num": "01",
+            "icon": "Документ",
+            "title": "Заявка",
+            "description": "Оставьте заявку с подробностями: марка авто, место, проблема. Telegram-бот или мессенджер."
+          },
+          {
+            "num": "02",
+            "icon": "Калькулятор",
+            "title": "Расчёт и подтверждение",
+            "description": "Оператор называет точную цену и время подачи. Фиксируем заказ — без сюрпризов."
+          },
+          {
+            "num": "03",
+            "icon": "Грузовик",
+            "title": "Подача и эвакуация",
+            "description": "Экипаж прибывает, аккуратно грузит, доставляет в нужную точку. Фотоотчёт в чат."
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "num",
+                "type": "string",
+                "title": "Номер шага"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Документ",
+                      "value": "Документ"
+                    },
+                    {
+                      "title": "Калькулятор",
+                      "value": "Калькулятор"
+                    },
+                    {
+                      "title": "Грузовик",
+                      "value": "Грузовик"
+                    },
+                    {
+                      "title": "Телефон",
+                      "value": "Телефон"
+                    },
+                    {
+                      "title": "Галочка",
+                      "value": "Галочка"
+                    }
+                  ]
+                },
+                "name": "icon",
+                "type": "string",
+                "title": "Иконка"
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Название"
+              },
+              {
+                "name": "description",
+                "type": "text",
+                "title": "Описание"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Шаги"
+      }
+    ],
+    "name": "stepsSection",
+    "type": "document",
+    "title": "Секция \"Как это работает\""
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Без скрытых платежей",
+        "name": "title",
+        "type": "string",
+        "title": "Заголовок"
+      },
+      {
+        "initialValue": "Все цены — фиксированные. Стоимость не изменится, даже если водитель приедет раньше или позже.",
+        "name": "description",
+        "type": "text",
+        "title": "Описание"
+      }
+    ],
+    "name": "notice",
+    "type": "document",
+    "title": "Блок уведомления"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Прозрачные цены",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Заголовок секции"
+      },
+      {
+        "initialValue": "без скрытых платежей",
+        "name": "sectionSubtitle",
+        "type": "string",
+        "title": "Подзаголовок секции"
+      },
+      {
+        "initialValue": "Фиксированные тарифы — вы всегда знаете, сколько заплатите. Никаких сюрпризов.",
+        "name": "sectionDescription",
+        "type": "text",
+        "title": "Описание секции"
+      },
+      {
+        "initialValue": "* Точную стоимость уточняйте у оператора. Цена зависит от расстояния и типа техники.",
+        "name": "footerNote",
+        "type": "text",
+        "title": "Примечание"
+      },
+      {
+        "initialValue": [
+          {
+            "name": "По городу",
+            "price": "от 2500 ₽",
+            "features": [
+              "Подача от 15 минут",
+              "Фиксированная цена",
+              "Любой тип авто"
+            ],
+            "cta": "Заказать",
+            "href": "https://t.me/evacuator31bot",
+            "highlight": false,
+            "order": 1
+          },
+          {
+            "name": "Межгород",
+            "price": "от 35 ₽/км",
+            "features": [
+              "Доставка в другой город",
+              "Страховка груза",
+              "Отслеживание онлайн"
+            ],
+            "cta": "Рассчитать",
+            "href": "https://t.me/evacuator31bot",
+            "highlight": true,
+            "order": 2
+          },
+          {
+            "name": "Спецтехника",
+            "price": "от 4000 ₽",
+            "features": [
+              "Погрузчики, тракторы",
+              "Мощный эвакуатор",
+              "Опытные водители"
+            ],
+            "cta": "Уточнить",
+            "href": "https://t.me/evacuator31bot",
+            "highlight": false,
+            "order": 3
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "name",
+                "type": "string",
+                "title": "Название тарифа"
+              },
+              {
+                "name": "price",
+                "type": "string",
+                "title": "Цена"
+              },
+              {
+                "of": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "name": "features",
+                "type": "array",
+                "title": "Особенности"
+              },
+              {
+                "name": "cta",
+                "type": "string",
+                "title": "Текст кнопки"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "href",
+                "type": "url",
+                "title": "Ссылка кнопки"
+              },
+              {
+                "name": "highlight",
+                "type": "boolean",
+                "title": "Выделить (популярный)"
+              },
+              {
+                "name": "order",
+                "type": "number",
+                "title": "Порядок"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "plans",
+        "type": "array",
+        "title": "Тарифы"
+      }
+    ],
+    "name": "pricing",
+    "type": "document",
+    "title": "Цены"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Работаем по всей",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Заголовок секции"
+      },
+      {
+        "initialValue": "Белгородской области",
+        "name": "sectionSubtitle",
+        "type": "string",
+        "title": "Подзаголовок секции"
+      },
+      {
+        "initialValue": [
+          {
+            "text": "Белгород и пригород"
+          },
+          {
+            "text": "Старый Оскол"
+          },
+          {
+            "text": "Губкин"
+          },
+          {
+            "text": "Шебекино"
+          },
+          {
+            "text": "Валуйки"
+          },
+          {
+            "text": "Алексеевка"
+          },
+          {
+            "text": "Строитель"
+          },
+          {
+            "text": "Новый Оскол"
+          },
+          {
+            "text": "Другие районы"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "text",
+                "type": "string",
+                "title": "Текст"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "areas",
+        "type": "array",
+        "title": "Районы"
+      },
+      {
+        "initialValue": "Выезжаем в соседние области: Курская, Воронежская, Харьковская (при возможности).",
+        "name": "tipText",
+        "type": "text",
+        "title": "Подсказка"
+      },
+      {
+        "name": "image",
+        "type": "image",
+        "title": "Изображение"
+      },
+      {
+        "initialValue": "30+",
+        "name": "badgeTitle",
+        "type": "string",
+        "title": "Текст значка"
+      },
+      {
+        "initialValue": "населённых пунктов",
+        "name": "badgeSubtitle",
+        "type": "string",
+        "title": "Подпись значка"
+      }
+    ],
+    "name": "zone",
+    "type": "document",
+    "title": "Зона работы"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Свяжитесь с нами",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Заголовок секции"
+      },
+      {
+        "initialValue": "Выберите удобный способ связи",
+        "name": "sectionSubtitle",
+        "type": "string",
+        "title": "Подзаголовок секции"
+      },
+      {
+        "initialValue": "Отвечаем за 2 минуты",
+        "name": "responseTime",
+        "type": "string",
+        "title": "Время ответа"
+      },
+      {
+        "initialValue": "+7 (4722) 00-00-00",
+        "name": "phone",
+        "type": "string",
+        "title": "Телефон"
+      },
+      {
+        "initialValue": "Круглосуточно, без выходных",
+        "name": "schedule",
+        "type": "string",
+        "title": "График работы"
+      },
+      {
+        "initialValue": "Автоматический расчёт стоимости",
+        "name": "botFeature",
+        "type": "string",
+        "title": "Текст о боте"
+      },
+      {
+        "initialValue": [
+          {
+            "platform": "telegram",
+            "title": "Telegram",
+            "description": "Быстрый заказ через бота",
+            "url": "https://t.me/evacuator31bot",
+            "order": 1
+          },
+          {
+            "platform": "vk",
+            "title": "ВКонтакте",
+            "description": "Сообщество и поддержка",
+            "url": "https://vk.me/evacuator31bot",
+            "order": 2
+          },
+          {
+            "platform": "max",
+            "title": "Max",
+            "description": "Альтернативный мессенджер",
+            "url": "https://max.com/evacuator31bot",
+            "order": 3
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "list": [
+                    "telegram",
+                    "vk",
+                    "max"
+                  ]
+                },
+                "name": "platform",
+                "type": "string",
+                "title": "Платформа"
+              },
+              {
+                "name": "title",
+                "type": "string",
+                "title": "Название"
+              },
+              {
+                "name": "description",
+                "type": "text",
+                "title": "Описание"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "uri",
+                        "constraint": {
+                          "options": {
+                            "scheme": [
+                              "/^http$/",
+                              "/^https$/"
+                            ],
+                            "allowRelative": false,
+                            "relativeOnly": false,
+                            "allowCredentials": false
+                          }
+                        }
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "url",
+                "type": "url",
+                "title": "Ссылка"
+              },
+              {
+                "name": "order",
+                "type": "number",
+                "title": "Порядок"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "contacts",
+        "type": "array",
+        "title": "Контакты"
+      }
+    ],
+    "name": "contactsSection",
+    "type": "document",
+    "title": "Контакты"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "FAQ",
+        "name": "sectionLabel",
+        "type": "string",
+        "title": "Метка секции"
+      },
+      {
+        "initialValue": "Ответы на частые вопросы",
+        "name": "sectionTitle",
+        "type": "string",
+        "title": "Заголовок секции"
+      },
+      {
+        "initialValue": [
+          {
+            "question": "Сколько ждать эвакуатор?",
+            "answer": "В среднем 20-40 минут. Точное время назовём после получения вашей геолокации."
+          },
+          {
+            "question": "Как происходит оплата?",
+            "answer": "Наличные, карта, перевод. Чек предоставляется. Возможна оплата после доставки."
+          },
+          {
+            "question": "Что если авто не на ходу?",
+            "answer": "Укажите это в заявке — приедет платформа с лебёдкой или манипулятор."
+          },
+          {
+            "question": "Работаете с юрлицами?",
+            "answer": "Да, предоставляем договор, акты, работаем с НДС."
+          },
+          {
+            "question": "Работаете ли вы ночью и в праздники?",
+            "answer": "Да, круглосуточно и без выходных — 365 дней в году."
+          },
+          {
+            "question": "Можно ли отследить эвакуатор?",
+            "answer": "Да, через Telegram-бот вы получите ссылку для отслеживания местоположения экипажа."
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "question",
+                "type": "string",
+                "title": "Вопрос"
+              },
+              {
+                "name": "answer",
+                "type": "text",
+                "title": "Ответ"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "items",
+        "type": "array",
+        "title": "Вопросы и ответы"
+      }
+    ],
+    "name": "faqSection",
+    "type": "document",
+    "title": "Секция FAQ"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Нужен эвакуатор прямо сейчас?",
+        "name": "title",
+        "type": "string",
+        "title": "Заголовок"
+      },
+      {
+        "initialValue": "Напишите нам — и мы отправим ближайшую машину. Быстро, без лишних вопросов.",
+        "name": "description",
+        "type": "text",
+        "title": "Описание"
+      },
+      {
+        "initialValue": "https://t.me/evacuator31bot",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "telegramUrl",
+        "type": "url",
+        "title": "Ссылка Telegram"
+      },
+      {
+        "initialValue": "Написать в Telegram",
+        "name": "telegramText",
+        "type": "string",
+        "title": "Текст кнопки Telegram"
+      },
+      {
+        "initialValue": "https://vk.me/evacuator31",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "vkUrl",
+        "type": "url",
+        "title": "Ссылка VK"
+      },
+      {
+        "initialValue": "Написать в VK",
+        "name": "vkText",
+        "type": "string",
+        "title": "Текст кнопки VK"
+      },
+      {
+        "initialValue": "https://max.com/evacuator31",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "maxUrl",
+        "type": "url",
+        "title": "Ссылка Max"
+      },
+      {
+        "initialValue": "Написать в Max",
+        "name": "maxText",
+        "type": "string",
+        "title": "Текст кнопки Max"
+      }
+    ],
+    "name": "cta",
+    "type": "document",
+    "title": "Призыв к действию"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Белгород",
+        "name": "cityText",
+        "type": "string",
+        "title": "Город"
+      },
+      {
+        "initialValue": "https://t.me/evacuator31bot",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "telegramUrl",
+        "type": "url",
+        "title": "Ссылка Telegram"
+      },
+      {
+        "initialValue": "https://vk.com/evacuator31",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "vkUrl",
+        "type": "url",
+        "title": "Ссылка VK"
+      }
+    ],
+    "name": "footer",
+    "type": "document",
+    "title": "Подвал сайта"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Текст",
+              "value": "text"
+            },
+            {
+              "title": "Изображение",
+              "value": "image"
+            }
+          ],
+          "layout": "radio"
+        },
+        "initialValue": "text",
+        "name": "logoType",
+        "type": "string",
+        "title": "Тип логотипа"
+      },
+      {
+        "initialValue": "Эвакуатор",
+        "hidden": "conditional",
+        "name": "logoText",
+        "type": "string",
+        "title": "Текст логотипа"
+      },
+      {
+        "initialValue": "31",
+        "hidden": "conditional",
+        "name": "logoHighlight",
+        "type": "string",
+        "title": "Выделенная часть логотипа"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "hidden": "conditional",
+        "name": "logoImage",
+        "type": "image",
+        "title": "Изображение логотипа"
+      },
+      {
+        "initialValue": "Заказать",
+        "name": "orderButtonText",
+        "type": "string",
+        "title": "Текст кнопки заказа"
+      },
+      {
+        "initialValue": "https://t.me/evacuator31bot",
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "orderButtonUrl",
+        "type": "url",
+        "title": "Ссылка кнопки заказа"
+      },
+      {
+        "initialValue": [
+          {
+            "label": "Услуги",
+            "section": "services"
+          },
+          {
+            "label": "Цены",
+            "section": "pricing"
+          },
+          {
+            "label": "Зона работы",
+            "section": "zone"
+          },
+          {
+            "label": "Контакты",
+            "section": "contacts"
+          },
+          {
+            "label": "FAQ",
+            "section": "faq"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "label",
+                "type": "string",
+                "title": "Название ссылки"
+              },
+              {
+                "options": {
+                  "list": [
+                    {
+                      "title": "Услуги",
+                      "value": "services"
+                    },
+                    {
+                      "title": "Цены",
+                      "value": "pricing"
+                    },
+                    {
+                      "title": "Как это работает",
+                      "value": "how"
+                    },
+                    {
+                      "title": "Зона работы",
+                      "value": "zone"
+                    },
+                    {
+                      "title": "Контакты",
+                      "value": "contacts"
+                    },
+                    {
+                      "title": "FAQ",
+                      "value": "faq"
+                    }
+                  ]
+                },
+                "name": "section",
+                "type": "string",
+                "title": "На какую секцию ведёт"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "links",
+        "type": "array",
+        "title": "Ссылки навигации"
+      }
+    ],
+    "name": "navbar",
+    "type": "document",
+    "title": "Навигация"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "Эвакуатор 31 — Эвакуация авто в Белгороде",
+        "name": "siteTitle",
+        "type": "string",
+        "title": "Название сайта"
+      },
+      {
+        "initialValue": "Быстрая эвакуация автомобилей в Белгороде и области. Работаем 24/7. Подача от 15 минут.",
+        "name": "siteDescription",
+        "type": "text",
+        "title": "Описание сайта"
+      },
+      {
+        "initialValue": [
+          "эвакуатор",
+          "белгород",
+          "эвакуация авто",
+          "эвакуатор 31"
+        ],
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "keywords",
+        "type": "array",
+        "title": "Ключевые слова"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": "https://t.me/evacuator31bot",
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "telegramUrl",
+            "type": "url",
+            "title": "Ссылка Telegram"
+          },
+          {
+            "initialValue": "https://vk.me/evacuator31bot",
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "vkUrl",
+            "type": "url",
+            "title": "Ссылка VK"
+          },
+          {
+            "initialValue": "https://max.com/evacuator31bot",
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "maxUrl",
+            "type": "url",
+            "title": "Ссылка Max"
+          },
+          {
+            "initialValue": "+7-921-431-2020",
+            "name": "phoneNumber",
+            "type": "string",
+            "title": "Номер телефона"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "object",
+        "title": "Социальные сети и контакты"
+      }
+    ],
+    "name": "siteSettings",
+    "type": "document",
+    "title": "Настройки сайта"
+  }
+]
