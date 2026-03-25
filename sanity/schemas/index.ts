@@ -35,24 +35,6 @@ export const hero = {
       type: 'string',
       initialValue: 'Эвакуация 24/7'
     },
-    { 
-      name: 'telegramUrl', 
-      title: 'Ссылка Telegram', 
-      type: 'url',
-      initialValue: 'https://t.me/evacuator31bot'
-    },
-    { 
-      name: 'vkUrl', 
-      title: 'Ссылка VK', 
-      type: 'url',
-      initialValue: 'https://vk.me/evacuator31bot'
-    },
-    { 
-      name: 'maxUrl', 
-      title: 'Ссылка Max', 
-      type: 'url',
-      initialValue: 'https://max.com/evacuator31bot'
-    },
     { name: 'heroImage', title: 'Фоновое изображение', type: 'image' },
     {
       name: 'badges',
@@ -65,15 +47,26 @@ export const hero = {
             name: 'icon',
             title: 'Иконка',
             type: 'string',
-            options: { list: ['clock', 'mapPin', 'bot'] }
+            options: { 
+              list: [
+                { title: 'Часы', value: 'Часы' },
+                { title: 'Метка на карте', value: 'Метка на карте' },
+                { title: 'Робот', value: 'Робот' },
+                { title: 'Телефон', value: 'Телефон' },
+                { title: 'Звезда', value: 'Звезда' },
+                { title: 'Сердце', value: 'Сердце' },
+                { title: 'Щит', value: 'Щит' },
+                { title: 'Галочка', value: 'Галочка' }
+              ]
+            }
           },
           { name: 'text', title: 'Текст', type: 'string' }
         ]
       }],
       initialValue: [
-        { icon: 'clock', text: 'Подача от 15 мин' },
-        { icon: 'mapPin', text: 'По всей области' },
-        { icon: 'bot', text: 'Онлайн-заказ' }
+        { icon: 'Часы', text: 'Подача от 15 мин' },
+        { icon: 'Метка на карте', text: 'По всей области' },
+        { icon: 'Робот', text: 'Онлайн-заказ' }
       ]
     }
   ]
@@ -107,7 +100,16 @@ export const servicesSection = {
             name: 'icon',
             title: 'Иконка',
             type: 'string',
-            options: { list: ['car', 'truck', 'alertTriangle', 'route'] }
+            options: { 
+              list: [
+                { title: 'Легковой автомобиль', value: 'Легковой автомобиль' },
+                { title: 'Грузовик', value: 'Грузовик' },
+                { title: 'Предупреждение', value: 'Предупреждение' },
+                { title: 'Маршрут', value: 'Маршрут' },
+                { title: 'Ключ', value: 'Ключ' },
+                { title: 'Щит', value: 'Щит' }
+              ]
+            }
           },
           { name: 'title', title: 'Название', type: 'string' },
           { name: 'description', title: 'Описание', type: 'text' },
@@ -121,28 +123,28 @@ export const servicesSection = {
       }],
       initialValue: [
         {
-          icon: 'car',
+          icon: 'Легковой автомобиль',
           title: 'Легковые автомобили',
           description: 'До 2,5 тонн. Аккуратная погрузка, фиксация колёс, страховка груза.',
           price: 'От 2 500 ₽',
           orderUrl: 'https://t.me/evacuator31bot'
         },
         {
-          icon: 'truck',
+          icon: 'Грузовик',
           title: 'Грузовые и микроавтобусы',
           description: 'До 10 тонн. Манипуляторы, низкорамные платформы, работа с негабаритом.',
           price: 'От 4 500 ₽',
           orderUrl: 'https://t.me/evacuator31bot'
         },
         {
-          icon: 'alertTriangle',
+          icon: 'Предупреждение',
           title: 'После ДТП и сложные случаи',
           description: 'Вытаскиваем из кювета, сугробов, парковок. Работаем со страховыми.',
           price: 'Расчёт индивидуально',
           orderUrl: 'https://t.me/evacuator31bot'
         },
         {
-          icon: 'route',
+          icon: 'Маршрут',
           title: 'Междугородняя эвакуация',
           description: 'Доставка по Белгородской области и РФ. Прозрачный тариф за км.',
           price: 'От 50 ₽/км',
@@ -181,7 +183,18 @@ export const benefitsSection = {
             name: 'icon',
             title: 'Иконка',
             type: 'string',
-            options: { list: ['messageSquare', 'dollarSign', 'shield', 'wrench'] }
+            options: { 
+              list: [
+                { title: 'Сообщение', value: 'Сообщение' },
+                { title: 'Доллар', value: 'Доллар' },
+                { title: 'Щит', value: 'Щит' },
+                { title: 'Гаечный ключ', value: 'Гаечный ключ' },
+                { title: 'Звезда', value: 'Звезда' },
+                { title: 'Сердце', value: 'Сердце' },
+                { title: 'Часы', value: 'Часы' },
+                { title: 'Галочка', value: 'Галочка' }
+              ]
+            }
           },
           { name: 'title', title: 'Название', type: 'string' },
           { name: 'description', title: 'Описание', type: 'text' }
@@ -192,22 +205,22 @@ export const benefitsSection = {
       }],
       initialValue: [
         {
-          icon: 'messageSquare',
+          icon: 'Сообщение',
           title: 'Удобный заказ',
           description: 'Никаких колл-центров — напишите в VK, Max или создайте заявку через Telegram-бота.'
         },
         {
-          icon: 'dollarSign',
+          icon: 'Доллар',
           title: 'Честная цена',
           description: 'Фикс в момент заказа, без «накруток на месте». Итоговая цена фиксируется до выезда.'
         },
         {
-          icon: 'shield',
+          icon: 'Щит',
           title: 'Ответственность',
           description: 'Договор, фотофиксация авто до погрузки, страховка груза на весь маршрут.'
         },
         {
-          icon: 'wrench',
+          icon: 'Гаечный ключ',
           title: 'Опыт',
           description: 'Водители со стажем 5+ лет, спецоснащение для сложных случаев и ДТП.'
         }
@@ -245,7 +258,15 @@ export const stepsSection = {
             name: 'icon',
             title: 'Иконка',
             type: 'string',
-            options: { list: ['fileText', 'calculator', 'truck'] }
+            options: { 
+              list: [
+                { title: 'Документ', value: 'Документ' },
+                { title: 'Калькулятор', value: 'Калькулятор' },
+                { title: 'Грузовик', value: 'Грузовик' },
+                { title: 'Телефон', value: 'Телефон' },
+                { title: 'Галочка', value: 'Галочка' }
+              ]
+            }
           },
           { name: 'title', title: 'Название', type: 'string' },
           { name: 'description', title: 'Описание', type: 'text' }
@@ -257,19 +278,19 @@ export const stepsSection = {
       initialValue: [
         {
           num: '01',
-          icon: 'fileText',
+          icon: 'Документ',
           title: 'Заявка',
           description: 'Оставьте заявку с подробностями: марка авто, место, проблема. Telegram-бот или мессенджер.'
         },
         {
           num: '02',
-          icon: 'calculator',
+          icon: 'Калькулятор',
           title: 'Расчёт и подтверждение',
           description: 'Оператор называет точную цену и время подачи. Фиксируем заказ — без сюрпризов.'
         },
         {
           num: '03',
-          icon: 'truck',
+          icon: 'Грузовик',
           title: 'Подача и эвакуация',
           description: 'Экипаж прибывает, аккуратно грузит, доставляет в нужную точку. Фотоотчёт в чат.'
         }
@@ -703,16 +724,33 @@ export const navbar = {
       of: [{
         type: 'object',
         fields: [
-          { name: 'label', title: 'Название', type: 'string' },
-          { name: 'href', title: 'Ссылка', type: 'string' }
-        ]
+          { name: 'label', title: 'Название ссылки', type: 'string' },
+          { 
+            name: 'section', 
+            title: 'На какую секцию ведёт', 
+            type: 'string',
+            options: {
+              list: [
+                { title: 'Услуги', value: 'services' },
+                { title: 'Цены', value: 'pricing' },
+                { title: 'Как это работает', value: 'how' },
+                { title: 'Зона работы', value: 'zone' },
+                { title: 'Контакты', value: 'contacts' },
+                { title: 'FAQ', value: 'faq' }
+              ]
+            }
+          }
+        ],
+        preview: {
+          select: { title: 'label', subtitle: 'section' }
+        }
       }],
       initialValue: [
-        { label: 'Услуги', href: '#services' },
-        { label: 'Цены', href: '#pricing' },
-        { label: 'Зона работы', href: '#zone' },
-        { label: 'Контакты', href: '#contacts' },
-        { label: 'FAQ', href: '#faq' }
+        { label: 'Услуги', section: 'services' },
+        { label: 'Цены', section: 'pricing' },
+        { label: 'Зона работы', section: 'zone' },
+        { label: 'Контакты', section: 'contacts' },
+        { label: 'FAQ', section: 'faq' }
       ]
     }
   ]
@@ -741,6 +779,37 @@ export const siteSettings = {
       type: 'array', 
       of: [{ type: 'string' }],
       initialValue: ['эвакуатор', 'белгород', 'эвакуация авто', 'эвакуатор 31']
+    },
+    {
+      name: 'socialLinks',
+      title: 'Социальные сети и контакты',
+      type: 'object',
+      fields: [
+        { 
+          name: 'telegramUrl', 
+          title: 'Ссылка Telegram', 
+          type: 'url',
+          initialValue: 'https://t.me/evacuator31bot'
+        },
+        { 
+          name: 'vkUrl', 
+          title: 'Ссылка VK', 
+          type: 'url',
+          initialValue: 'https://vk.me/evacuator31bot'
+        },
+        { 
+          name: 'maxUrl', 
+          title: 'Ссылка Max', 
+          type: 'url',
+          initialValue: 'https://max.com/evacuator31bot'
+        },
+        { 
+          name: 'phoneNumber', 
+          title: 'Номер телефона', 
+          type: 'string',
+          initialValue: '+7-921-431-2020'
+        }
+      ]
     }
   ]
 }

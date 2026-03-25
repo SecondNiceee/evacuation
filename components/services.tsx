@@ -1,16 +1,10 @@
 "use client"
 
 import Image from "next/image"
-import { Car, Truck, AlertTriangle, Route } from "lucide-react"
+import { Car } from "lucide-react"
 import { useServicesSection } from "@/hooks/use-sanity"
 import { urlFor } from "@/lib/sanity"
-
-const iconMap = {
-  car: Car,
-  truck: Truck,
-  alertTriangle: AlertTriangle,
-  route: Route,
-}
+import { getIcon } from "@/lib/icon-map"
 
 // Default data (fallback)
 const defaultSection = {
@@ -18,7 +12,7 @@ const defaultSection = {
   sectionTitle: "Эвакуируем спецтехнику под ваши задачи",
   items: [
     {
-      icon: "car" as const,
+      icon: "Легковой автомобиль",
       title: "Легковые автомобили",
       description: "До 2,5 тонн. Аккуратная погрузка, фиксация колёс, страховка груза.",
       price: "От 2 500 ₽",
@@ -26,7 +20,7 @@ const defaultSection = {
       orderUrl: "https://t.me/evacuator31bot",
     },
     {
-      icon: "truck" as const,
+      icon: "Грузовик",
       title: "Грузовые и микроавтобусы",
       description: "До 10 тонн. Манипуляторы, низкорамные платформы, работа с негабаритом.",
       price: "От 4 500 ₽",
@@ -34,7 +28,7 @@ const defaultSection = {
       orderUrl: "https://t.me/evacuator31bot",
     },
     {
-      icon: "alertTriangle" as const,
+      icon: "Предупреждение",
       title: "После ДТП и сложные случаи",
       description: "Вытаскиваем из кювета, сугробов, парковок. Работаем со страховыми.",
       price: "Расчёт индивидуально",
@@ -42,7 +36,7 @@ const defaultSection = {
       orderUrl: "https://t.me/evacuator31bot",
     },
     {
-      icon: "route" as const,
+      icon: "Маршрут",
       title: "Междугородняя эвакуация",
       description: "Доставка по Белгородской области и РФ. Прозрачный тариф за км.",
       price: "От 50 ₽/км",
@@ -71,7 +65,7 @@ export function Services() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((s, index) => {
-            const Icon = iconMap[s.icon] || Car
+            const Icon = getIcon(s.icon, Car)
             const imageUrl = s.image 
               ? (typeof s.image === 'string' ? s.image : urlFor(s.image).url())
               : "/images/hero-tow.jpg"

@@ -1,21 +1,16 @@
 "use client"
 
 import Image from "next/image"
-import { Clock, MapPin, Bot } from "lucide-react"
-import { useHero } from "@/hooks/use-sanity"
+import { Clock } from "lucide-react"
+import { useHero, useSiteSettings } from "@/hooks/use-sanity"
 import { urlFor } from "@/lib/sanity"
-
-const iconMap = {
-  clock: Clock,
-  mapPin: MapPin,
-  bot: Bot,
-}
+import { getIcon } from "@/lib/icon-map"
 
 // Default data (fallback)
 const defaultBadges = [
-  { icon: "clock" as const, text: "Подача от 20 минут (24/7)" },
-  { icon: "mapPin" as const, text: "Работаем по всему СПб" },
-  { icon: "bot" as const, text: "Заказ в Telegram-боте" },
+  { icon: "Часы", text: "Подача от 20 минут (24/7)" },
+  { icon: "Метка на карте", text: "Работаем по всему СПб" },
+  { icon: "Робот", text: "Заказ в Telegram-боте" },
 ]
 
 const defaultHero = {
@@ -24,18 +19,25 @@ const defaultHero = {
   titleHighlight2: "надёжно",
   subtitle: "Подача машины от 20 минут. Легковые, грузовые, после ДТП, из труднодоступных мест — работаем 24/7.",
   tagText: "Санкт-Петербург — круглосуточно",
-  telegramUrl: "https://t.me/your_bot",
-  vkUrl: "https://vk.com/your_group",
-  maxUrl: "https://max.ru/your_group",
   badges: defaultBadges,
 }
 
-export function Hero() {
-  const { data } = useHero()
-  const hero = data || defaultHero
-  const badges = hero.badges || defaultBadges
+const defaultSocialLinks = {
+  telegramUrl: "https://t.me/your_bot",
+  vkUrl: "https://vk.com/your_group",
+  maxUrl: "https://max.ru/your_group",
+  phoneNumber: "+7-921-431-2020",
+}
 
-  const heroImageUrl = hero.heroImage ? urlFor(hero.heroImage).url() : "/images/hero-tow.jpg"
+export function Hero() {
+  const { data: hero } = useHero()
+  const { data: settings } = useSiteSettings()
+  
+  const heroData = hero || defaultHero
+  const socialLinks = settings?.socialLinks || defaultSocialLinks
+  const badges = heroData.badges || defaultBadges
+
+  const heroImageUrl = heroData.heroImage ? urlFor(heroData.heroImage).url() : "/images/hero-tow.jpg"
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -58,23 +60,23 @@ export function Hero() {
           {/* Tag */}
           <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            {hero.tagText}
+            {heroData.tagText}
           </div>
 
           <h1 className="font-mono font-bold text-4xl md:text-6xl lg:text-7xl text-foreground leading-tight text-balance mb-6">
-            {hero.title}<br />
-            <span className="text-primary">{hero.titleHighlight1}</span> и{" "}
-            <span style={{ color: "oklch(0.78 0.18 70)" }}>{hero.titleHighlight2}</span>
+            {heroData.title}<br />
+            <span className="text-primary">{heroData.titleHighlight1}</span> и{" "}
+            <span style={{ color: "oklch(0.78 0.18 70)" }}>{heroData.titleHighlight2}</span>
           </h1>
 
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed mb-10 max-w-xl text-pretty">
-            {hero.subtitle}
+            {heroData.subtitle}
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-3 mb-12">
             <a
-              href={hero.telegramUrl}
+              href={socialLinks.telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-primary/90 transition-all shadow-lg shadow-primary/25"
@@ -85,7 +87,7 @@ export function Hero() {
               Заказать в Telegram
             </a>
             <a
-              href={hero.vkUrl}
+              href={socialLinks.vkUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-secondary text-foreground border border-border px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-secondary/80 transition-all"
@@ -96,7 +98,7 @@ export function Hero() {
               Написать во VK
             </a>
             <a
-              href={hero.maxUrl}
+              href={socialLinks.maxUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-secondary text-foreground border border-border px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-secondary/80 transition-all"
@@ -108,7 +110,7 @@ export function Hero() {
           {/* Badges */}
           <div className="flex flex-wrap gap-3">
             {badges.map((badge, index) => {
-              const Icon = iconMap[badge.icon] || Clock
+              const Icon = getIcon(badge.icon, Clock)
               return (
                 <div
                   key={badge._key || index}

@@ -43,7 +43,7 @@ export function FAQ() {
   const faqs = section.items || defaultSection.items
 
   return (
-    <section className="py-24 bg-background">
+    <section id="faq" className="py-24 bg-background">
       <div className="max-w-3xl mx-auto px-4 md:px-8">
         <div className="mb-12 text-center">
           <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">
