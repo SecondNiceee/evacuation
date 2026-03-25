@@ -178,19 +178,19 @@ export interface SanitySiteSettings {
   keywords: string[]
 }
 
-// GROQ Queries
+// GROQ Queries - Singletons use fixed document IDs
 export const queries = {
-  hero: `*[_type == "hero"][0]`,
+  hero: `*[_id == "hero"][0]`,
   services: `*[_type == "service"] | order(order asc)`,
   benefits: `*[_type == "benefit"] | order(order asc)`,
   steps: `*[_type == "step"] | order(order asc)`,
-  notice: `*[_type == "notice"][0]`,
-  pricing: `*[_type == "pricing"][0]{ ..., plans[]{ ..., _key } }`,
-  zone: `*[_type == "zone"][0]`,
-  contactsSection: `*[_type == "contactsSection"][0]{ ..., contacts[]{ ..., _key } }`,
+  notice: `*[_id == "notice"][0]`,
+  pricing: `*[_id == "pricing"][0]{ ..., plans[]{ ..., _key } }`,
+  zone: `*[_id == "zone"][0]`,
+  contactsSection: `*[_id == "contactsSection"][0]{ ..., contacts[]{ ..., _key } }`,
   faqs: `*[_type == "faq"] | order(order asc)`,
-  cta: `*[_type == "cta"][0]`,
-  footer: `*[_type == "footer"][0]`,
-  navbar: `*[_type == "navbar"][0]`,
-  siteSettings: `*[_type == "siteSettings"][0]`,
+  cta: `*[_id == "cta"][0]`,
+  footer: `*[_id == "footer"][0]`,
+  navbar: `*[_id == "navbar"][0]`,
+  siteSettings: `*[_id == "siteSettings"][0]`,
 }
