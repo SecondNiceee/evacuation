@@ -693,17 +693,39 @@ export const navbar = {
   title: 'Навигация',
   type: 'document',
   fields: [
+    {
+      name: 'logoType',
+      title: 'Тип логотипа',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Текст', value: 'text' },
+          { title: 'Изображение', value: 'image' }
+        ],
+        layout: 'radio'
+      },
+      initialValue: 'text'
+    },
     { 
       name: 'logoText', 
       title: 'Текст логотипа', 
       type: 'string',
-      initialValue: 'Эвакуатор'
+      initialValue: 'Эвакуатор',
+      hidden: ({ document }: { document: { logoType?: string } }) => document?.logoType === 'image'
     },
     { 
       name: 'logoHighlight', 
       title: 'Выделенная часть логотипа', 
       type: 'string',
-      initialValue: '31'
+      initialValue: '31',
+      hidden: ({ document }: { document: { logoType?: string } }) => document?.logoType === 'image'
+    },
+    {
+      name: 'logoImage',
+      title: 'Изображение логотипа',
+      type: 'image',
+      options: { hotspot: true },
+      hidden: ({ document }: { document: { logoType?: string } }) => document?.logoType !== 'image'
     },
     { 
       name: 'orderButtonText', 

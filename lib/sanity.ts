@@ -169,8 +169,10 @@ export interface SanityFooter {
 
 export interface SanityNavbar {
   _id: string
+  logoType: 'text' | 'image'
   logoText: string
   logoHighlight: string
+  logoImage?: SanityImageSource
   orderButtonText: string
   orderButtonUrl: string
   links: Array<{
@@ -206,6 +208,6 @@ export const queries = {
   faqSection: `*[_id == "faqSection"][0]{ ..., items[]{ ..., _key } }`,
   cta: `*[_id == "cta"][0]`,
   footer: `*[_id == "footer"][0]`,
-  navbar: `*[_id == "navbar"][0]`,
+  navbar: `*[_id == "navbar"][0]{ ..., logoImage{ asset-> } }`,
   siteSettings: `*[_id == "siteSettings"][0]`,
 }
