@@ -1,8 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Menu, X, Truck } from "lucide-react"
 import { useNavbar } from "@/hooks/use-sanity"
+import { urlFor } from "@/lib/sanity"
 
 // Default data (fallback)
 const defaultNavLinks = [
@@ -47,12 +49,24 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-            <Truck className="w-5 h-5 text-primary-foreground" />
-          </div>
-          <span className="font-mono font-bold text-foreground tracking-tight text-lg">
-            {navbar.logoText}<span className="text-primary">{navbar.logoHighlight}</span>
-          </span>
+          {navbar.logoType === 'image' && navbar.logoImage ? (
+            <Image
+              src={urlFor(navbar.logoImage).height(36).url()}
+              alt="Логотип"
+              width={120}
+              height={36}
+              className="h-9 w-auto object-contain"
+            />
+          ) : (
+            <>
+              <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
+                <Truck className="w-5 h-5 text-primary-foreground" />
+              </div>
+              <span className="font-mono font-bold text-foreground tracking-tight text-lg">
+                {navbar.logoText}<span className="text-primary">{navbar.logoHighlight}</span>
+              </span>
+            </>
+          )}
         </a>
 
         {/* Desktop nav */}
