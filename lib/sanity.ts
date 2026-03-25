@@ -36,35 +36,50 @@ export interface SanityHero {
   }>
 }
 
-export interface SanityService {
-  _id: string
-  _key?: string
+export interface SanityServiceItem {
+  _key: string
   icon: 'car' | 'truck' | 'alertTriangle' | 'route'
   title: string
   description: string
   price: string
   image?: SanityImageSource
   orderUrl: string
-  order: number
 }
 
-export interface SanityBenefit {
+export interface SanityServicesSection {
   _id: string
-  _key?: string
+  sectionLabel: string
+  sectionTitle: string
+  items: SanityServiceItem[]
+}
+
+export interface SanityBenefitItem {
+  _key: string
   icon: 'messageSquare' | 'dollarSign' | 'shield' | 'wrench'
   title: string
   description: string
-  order: number
 }
 
-export interface SanityStep {
+export interface SanityBenefitsSection {
   _id: string
-  _key?: string
+  sectionLabel: string
+  sectionTitle: string
+  items: SanityBenefitItem[]
+}
+
+export interface SanityStepItem {
+  _key: string
   num: string
   icon: 'fileText' | 'calculator' | 'truck'
   title: string
   description: string
-  order: number
+}
+
+export interface SanityStepsSection {
+  _id: string
+  sectionLabel: string
+  sectionTitle: string
+  items: SanityStepItem[]
 }
 
 export interface SanityNotice {
@@ -131,12 +146,17 @@ export interface SanityContactsSection {
   contacts: SanityContact[]
 }
 
-export interface SanityFaq {
-  _id: string
-  _key?: string
+export interface SanityFaqItem {
+  _key: string
   question: string
   answer: string
-  order: number
+}
+
+export interface SanityFaqSection {
+  _id: string
+  sectionLabel: string
+  sectionTitle: string
+  items: SanityFaqItem[]
 }
 
 export interface SanityCta {
@@ -181,14 +201,14 @@ export interface SanitySiteSettings {
 // GROQ Queries - Singletons use fixed document IDs
 export const queries = {
   hero: `*[_id == "hero"][0]`,
-  services: `*[_type == "service"] | order(order asc)`,
-  benefits: `*[_type == "benefit"] | order(order asc)`,
-  steps: `*[_type == "step"] | order(order asc)`,
+  servicesSection: `*[_id == "servicesSection"][0]{ ..., items[]{ ..., _key } }`,
+  benefitsSection: `*[_id == "benefitsSection"][0]{ ..., items[]{ ..., _key } }`,
+  stepsSection: `*[_id == "stepsSection"][0]{ ..., items[]{ ..., _key } }`,
   notice: `*[_id == "notice"][0]`,
   pricing: `*[_id == "pricing"][0]{ ..., plans[]{ ..., _key } }`,
   zone: `*[_id == "zone"][0]`,
   contactsSection: `*[_id == "contactsSection"][0]{ ..., contacts[]{ ..., _key } }`,
-  faqs: `*[_type == "faq"] | order(order asc)`,
+  faqSection: `*[_id == "faqSection"][0]{ ..., items[]{ ..., _key } }`,
   cta: `*[_id == "cta"][0]`,
   footer: `*[_id == "footer"][0]`,
   navbar: `*[_id == "navbar"][0]`,

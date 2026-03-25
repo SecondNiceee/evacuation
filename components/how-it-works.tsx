@@ -1,7 +1,7 @@
 "use client"
 
 import { FileText, Calculator, Truck } from "lucide-react"
-import { useSteps, useNotice } from "@/hooks/use-sanity"
+import { useStepsSection, useNotice } from "@/hooks/use-sanity"
 
 const iconMap = {
   fileText: FileText,
@@ -10,29 +10,30 @@ const iconMap = {
 }
 
 // Default data (fallback)
-const defaultSteps = [
-  {
-    num: "01",
-    icon: "fileText" as const,
-    title: "Заявка",
-    description:
-      "Оставьте заявку с подробностями: марка авто, место, проблема. Telegram-бот или мессенджер.",
-  },
-  {
-    num: "02",
-    icon: "calculator" as const,
-    title: "Расчёт и подтверждение",
-    description:
-      "Оператор называет точную цену и время подачи. Фиксируем заказ — без сюрпризов.",
-  },
-  {
-    num: "03",
-    icon: "truck" as const,
-    title: "Подача и эвакуация",
-    description:
-      "Экипаж прибывает, аккуратно грузит, доставляет в нужную точку. Фотоотчёт в чат.",
-  },
-]
+const defaultSection = {
+  sectionLabel: "Как работаем",
+  sectionTitle: "3 шага до эвакуации",
+  items: [
+    {
+      num: "01",
+      icon: "fileText" as const,
+      title: "Заявка",
+      description: "Оставьте заявку с подробностями: марка авто, место, проблема. Telegram-бот или мессенджер.",
+    },
+    {
+      num: "02",
+      icon: "calculator" as const,
+      title: "Расчёт и подтверждение",
+      description: "Оператор называет точную цену и время подачи. Фиксируем заказ — без сюрпризов.",
+    },
+    {
+      num: "03",
+      icon: "truck" as const,
+      title: "Подача и эвакуация",
+      description: "Экипаж прибывает, аккуратно грузит, доставляет в нужную точку. Фотоотчёт в чат.",
+    },
+  ]
+}
 
 const defaultNotice = {
   title: "Важно знать",
@@ -40,10 +41,11 @@ const defaultNotice = {
 }
 
 export function HowItWorks() {
-  const { data: stepsData } = useSteps()
+  const { data: stepsData } = useStepsSection()
   const { data: noticeData } = useNotice()
 
-  const steps = stepsData && stepsData.length > 0 ? stepsData : defaultSteps
+  const section = stepsData || defaultSection
+  const steps = section.items || defaultSection.items
   const notice = noticeData || defaultNotice
 
   return (
@@ -51,10 +53,10 @@ export function HowItWorks() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="mb-12">
           <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">
-            Как работаем
+            {section.sectionLabel || defaultSection.sectionLabel}
           </p>
           <h2 className="font-mono font-bold text-3xl md:text-4xl text-foreground text-balance">
-            3 шага до эвакуации
+            {section.sectionTitle || defaultSection.sectionTitle}
           </h2>
         </div>
 
@@ -62,7 +64,7 @@ export function HowItWorks() {
           {steps.map((step, i) => {
             const Icon = iconMap[step.icon] || FileText
             return (
-              <div key={step._id || i} className="relative">
+              <div key={step._key || i} className="relative">
                 {/* Connector line */}
                 {i < steps.length - 1 && (
                   <div className="hidden md:block absolute top-8 left-[calc(100%_-_1rem)] w-8 h-px bg-primary/30 z-10" />

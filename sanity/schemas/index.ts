@@ -79,58 +79,202 @@ export const hero = {
   ]
 }
 
-export const service = {
-  name: 'service',
-  title: 'Услуги',
+export const servicesSection = {
+  name: 'servicesSection',
+  title: 'Секция услуг',
   type: 'document',
   fields: [
-    {
-      name: 'icon',
-      title: 'Иконка',
+    { 
+      name: 'sectionLabel', 
+      title: 'Метка секции', 
       type: 'string',
-      options: { list: ['car', 'truck', 'alertTriangle', 'route'] }
+      initialValue: 'Услуги'
     },
-    { name: 'title', title: 'Название', type: 'string' },
-    { name: 'description', title: 'Описание', type: 'text' },
-    { name: 'price', title: 'Цена', type: 'string' },
-    { name: 'image', title: 'Изображение', type: 'image' },
-    { name: 'orderUrl', title: 'Ссылка для заказа', type: 'url' },
-    { name: 'order', title: 'Порядок', type: 'number' }
+    { 
+      name: 'sectionTitle', 
+      title: 'Заголовок секции', 
+      type: 'string',
+      initialValue: 'Эвакуируем спецтехнику под ваши задачи'
+    },
+    {
+      name: 'items',
+      title: 'Карточки услуг',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          {
+            name: 'icon',
+            title: 'Иконка',
+            type: 'string',
+            options: { list: ['car', 'truck', 'alertTriangle', 'route'] }
+          },
+          { name: 'title', title: 'Название', type: 'string' },
+          { name: 'description', title: 'Описание', type: 'text' },
+          { name: 'price', title: 'Цена', type: 'string' },
+          { name: 'image', title: 'Изображение', type: 'image' },
+          { name: 'orderUrl', title: 'Ссылка для заказа', type: 'url' }
+        ],
+        preview: {
+          select: { title: 'title', subtitle: 'price' }
+        }
+      }],
+      initialValue: [
+        {
+          icon: 'car',
+          title: 'Легковые автомобили',
+          description: 'До 2,5 тонн. Аккуратная погрузка, фиксация колёс, страховка груза.',
+          price: 'От 2 500 ₽',
+          orderUrl: 'https://t.me/evacuator31bot'
+        },
+        {
+          icon: 'truck',
+          title: 'Грузовые и микроавтобусы',
+          description: 'До 10 тонн. Манипуляторы, низкорамные платформы, работа с негабаритом.',
+          price: 'От 4 500 ₽',
+          orderUrl: 'https://t.me/evacuator31bot'
+        },
+        {
+          icon: 'alertTriangle',
+          title: 'После ДТП и сложные случаи',
+          description: 'Вытаскиваем из кювета, сугробов, парковок. Работаем со страховыми.',
+          price: 'Расчёт индивидуально',
+          orderUrl: 'https://t.me/evacuator31bot'
+        },
+        {
+          icon: 'route',
+          title: 'Междугородняя эвакуация',
+          description: 'Доставка по Белгородской области и РФ. Прозрачный тариф за км.',
+          price: 'От 50 ₽/км',
+          orderUrl: 'https://t.me/evacuator31bot'
+        }
+      ]
+    }
   ]
 }
 
-export const benefit = {
-  name: 'benefit',
-  title: 'Преимущества',
+export const benefitsSection = {
+  name: 'benefitsSection',
+  title: 'Секция преимуществ',
   type: 'document',
   fields: [
-    {
-      name: 'icon',
-      title: 'Иконка',
+    { 
+      name: 'sectionLabel', 
+      title: 'Метка секции', 
       type: 'string',
-      options: { list: ['messageSquare', 'dollarSign', 'shield', 'wrench'] }
+      initialValue: 'Почему мы'
     },
-    { name: 'title', title: 'Название', type: 'string' },
-    { name: 'description', title: 'Описание', type: 'text' },
-    { name: 'order', title: 'Порядок', type: 'number' }
+    { 
+      name: 'sectionTitle', 
+      title: 'Заголовок секции', 
+      type: 'string',
+      initialValue: 'Мы сохраним ваши нервы и время'
+    },
+    {
+      name: 'items',
+      title: 'Карточки преимуществ',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          {
+            name: 'icon',
+            title: 'Иконка',
+            type: 'string',
+            options: { list: ['messageSquare', 'dollarSign', 'shield', 'wrench'] }
+          },
+          { name: 'title', title: 'Название', type: 'string' },
+          { name: 'description', title: 'Описание', type: 'text' }
+        ],
+        preview: {
+          select: { title: 'title' }
+        }
+      }],
+      initialValue: [
+        {
+          icon: 'messageSquare',
+          title: 'Удобный заказ',
+          description: 'Никаких колл-центров — напишите в VK, Max или создайте заявку через Telegram-бота.'
+        },
+        {
+          icon: 'dollarSign',
+          title: 'Честная цена',
+          description: 'Фикс в момент заказа, без «накруток на месте». Итоговая цена фиксируется до выезда.'
+        },
+        {
+          icon: 'shield',
+          title: 'Ответственность',
+          description: 'Договор, фотофиксация авто до погрузки, страховка груза на весь маршрут.'
+        },
+        {
+          icon: 'wrench',
+          title: 'Опыт',
+          description: 'Водители со стажем 5+ лет, спецоснащение для сложных случаев и ДТП.'
+        }
+      ]
+    }
   ]
 }
 
-export const step = {
-  name: 'step',
-  title: 'Как это работает',
+export const stepsSection = {
+  name: 'stepsSection',
+  title: 'Секция "Как это работает"',
   type: 'document',
   fields: [
-    { name: 'num', title: 'Номер шага', type: 'string' },
-    {
-      name: 'icon',
-      title: 'Иконка',
+    { 
+      name: 'sectionLabel', 
+      title: 'Метка секции', 
       type: 'string',
-      options: { list: ['fileText', 'calculator', 'truck'] }
+      initialValue: 'Как работаем'
     },
-    { name: 'title', title: 'Название', type: 'string' },
-    { name: 'description', title: 'Описание', type: 'text' },
-    { name: 'order', title: 'Порядок', type: 'number' }
+    { 
+      name: 'sectionTitle', 
+      title: 'Заголовок секции', 
+      type: 'string',
+      initialValue: '3 шага до эвакуации'
+    },
+    {
+      name: 'items',
+      title: 'Шаги',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'num', title: 'Номер шага', type: 'string' },
+          {
+            name: 'icon',
+            title: 'Иконка',
+            type: 'string',
+            options: { list: ['fileText', 'calculator', 'truck'] }
+          },
+          { name: 'title', title: 'Название', type: 'string' },
+          { name: 'description', title: 'Описание', type: 'text' }
+        ],
+        preview: {
+          select: { title: 'title', subtitle: 'num' }
+        }
+      }],
+      initialValue: [
+        {
+          num: '01',
+          icon: 'fileText',
+          title: 'Заявка',
+          description: 'Оставьте заявку с подробностями: марка авто, место, проблема. Telegram-бот или мессенджер.'
+        },
+        {
+          num: '02',
+          icon: 'calculator',
+          title: 'Расчёт и подтверждение',
+          description: 'Оператор называет точную цену и время подачи. Фиксируем заказ — без сюрпризов.'
+        },
+        {
+          num: '03',
+          icon: 'truck',
+          title: 'Подача и эвакуация',
+          description: 'Экипаж прибывает, аккуратно грузит, доставляет в нужную точку. Фотоотчёт в чат.'
+        }
+      ]
+    }
   ]
 }
 
@@ -380,14 +524,64 @@ export const contactsSection = {
   ]
 }
 
-export const faq = {
-  name: 'faq',
-  title: 'Частые вопросы',
+export const faqSection = {
+  name: 'faqSection',
+  title: 'Секция FAQ',
   type: 'document',
   fields: [
-    { name: 'question', title: 'Вопрос', type: 'string' },
-    { name: 'answer', title: 'Ответ', type: 'text' },
-    { name: 'order', title: 'Порядок', type: 'number' }
+    { 
+      name: 'sectionLabel', 
+      title: 'Метка секции', 
+      type: 'string',
+      initialValue: 'FAQ'
+    },
+    { 
+      name: 'sectionTitle', 
+      title: 'Заголовок секции', 
+      type: 'string',
+      initialValue: 'Ответы на частые вопросы'
+    },
+    {
+      name: 'items',
+      title: 'Вопросы и ответы',
+      type: 'array',
+      of: [{
+        type: 'object',
+        fields: [
+          { name: 'question', title: 'Вопрос', type: 'string' },
+          { name: 'answer', title: 'Ответ', type: 'text' }
+        ],
+        preview: {
+          select: { title: 'question' }
+        }
+      }],
+      initialValue: [
+        {
+          question: 'Сколько ждать эвакуатор?',
+          answer: 'В среднем 20-40 минут. Точное время назовём после получения вашей геолокации.'
+        },
+        {
+          question: 'Как происходит оплата?',
+          answer: 'Наличные, карта, перевод. Чек предоставляется. Возможна оплата после доставки.'
+        },
+        {
+          question: 'Что если авто не на ходу?',
+          answer: 'Укажите это в заявке — приедет платформа с лебёдкой или манипулятор.'
+        },
+        {
+          question: 'Работаете с юрлицами?',
+          answer: 'Да, предоставляем договор, акты, работаем с НДС.'
+        },
+        {
+          question: 'Работаете ли вы ночью и в праздники?',
+          answer: 'Да, круглосуточно и без выходных — 365 дней в году.'
+        },
+        {
+          question: 'Можно ли отследить эвакуатор?',
+          answer: 'Да, через Telegram-бот вы получите ссылку для отслеживания местоположения экипажа.'
+        }
+      ]
+    }
   ]
 }
 
@@ -554,14 +748,14 @@ export const siteSettings = {
 // Export all schemas
 export const schemaTypes = [
   hero,
-  service,
-  benefit,
-  step,
+  servicesSection,
+  benefitsSection,
+  stepsSection,
   notice,
   pricing,
   zone,
   contactsSection,
-  faq,
+  faqSection,
   cta,
   footer,
   navbar,
