@@ -31,14 +31,14 @@ export interface SanityHero {
   heroImage?: SanityImageSource
   badges: Array<{
     _key: string
-    icon: 'clock' | 'mapPin' | 'bot'
+    icon: string // Russian icon name
     text: string
   }>
 }
 
 export interface SanityServiceItem {
   _key: string
-  icon: 'car' | 'truck' | 'alertTriangle' | 'route'
+  icon: string // Russian icon name
   title: string
   description: string
   price: string
@@ -55,7 +55,7 @@ export interface SanityServicesSection {
 
 export interface SanityBenefitItem {
   _key: string
-  icon: 'messageSquare' | 'dollarSign' | 'shield' | 'wrench'
+  icon: string // Russian icon name
   title: string
   description: string
 }
@@ -70,7 +70,7 @@ export interface SanityBenefitsSection {
 export interface SanityStepItem {
   _key: string
   num: string
-  icon: 'fileText' | 'calculator' | 'truck'
+  icon: string // Russian icon name
   title: string
   description: string
 }
@@ -187,7 +187,7 @@ export interface SanityNavbar {
   links: Array<{
     _key: string
     label: string
-    href: string
+    section: string // Section ID: services, pricing, how, zone, contacts, faq
   }>
 }
 

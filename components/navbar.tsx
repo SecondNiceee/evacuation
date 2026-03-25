@@ -6,11 +6,11 @@ import { useNavbar } from "@/hooks/use-sanity"
 
 // Default data (fallback)
 const defaultNavLinks = [
-  { label: "Услуги", href: "#services" },
-  { label: "Цены", href: "#pricing" },
-  { label: "Как работаем", href: "#how" },
-  { label: "Зона работы", href: "#zone" },
-  { label: "Контакты", href: "#contacts" },
+  { label: "Услуги", section: "services" },
+  { label: "Цены", section: "pricing" },
+  { label: "Как работаем", section: "how" },
+  { label: "Зона работы", section: "zone" },
+  { label: "Контакты", section: "contacts" },
 ]
 
 const defaultData = {
@@ -20,6 +20,9 @@ const defaultData = {
   orderButtonUrl: "https://t.me/your_bot",
   links: defaultNavLinks,
 }
+
+// Convert section ID to href
+const sectionToHref = (section: string) => `#${section}`
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
@@ -56,8 +59,8 @@ export function Navbar() {
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((l) => (
             <a
-              key={l.href}
-              href={l.href}
+              key={l.section}
+              href={sectionToHref(l.section)}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               {l.label}
@@ -90,8 +93,8 @@ export function Navbar() {
         <div className="md:hidden bg-card border-b border-border px-4 pb-6 flex flex-col gap-4">
           {navLinks.map((l) => (
             <a
-              key={l.href}
-              href={l.href}
+              key={l.section}
+              href={sectionToHref(l.section)}
               onClick={() => setOpen(false)}
               className="text-foreground text-base py-1"
             >

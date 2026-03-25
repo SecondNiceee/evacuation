@@ -1,21 +1,16 @@
 "use client"
 
 import Image from "next/image"
-import { Clock, MapPin, Bot } from "lucide-react"
+import { Clock } from "lucide-react"
 import { useHero } from "@/hooks/use-sanity"
 import { urlFor } from "@/lib/sanity"
-
-const iconMap = {
-  clock: Clock,
-  mapPin: MapPin,
-  bot: Bot,
-}
+import { getIcon } from "@/lib/icon-map"
 
 // Default data (fallback)
 const defaultBadges = [
-  { icon: "clock" as const, text: "Подача от 20 минут (24/7)" },
-  { icon: "mapPin" as const, text: "Работаем по всему СПб" },
-  { icon: "bot" as const, text: "Заказ в Telegram-боте" },
+  { icon: "Часы", text: "Подача от 20 минут (24/7)" },
+  { icon: "Метка на карте", text: "Работаем по всему СПб" },
+  { icon: "Робот", text: "Заказ в Telegram-боте" },
 ]
 
 const defaultHero = {
@@ -108,7 +103,7 @@ export function Hero() {
           {/* Badges */}
           <div className="flex flex-wrap gap-3">
             {badges.map((badge, index) => {
-              const Icon = iconMap[badge.icon] || Clock
+              const Icon = getIcon(badge.icon, Clock)
               return (
                 <div
                   key={badge._key || index}

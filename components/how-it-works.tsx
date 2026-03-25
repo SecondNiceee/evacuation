@@ -1,13 +1,8 @@
 "use client"
 
-import { FileText, Calculator, Truck } from "lucide-react"
+import { FileText } from "lucide-react"
 import { useStepsSection, useNotice } from "@/hooks/use-sanity"
-
-const iconMap = {
-  fileText: FileText,
-  calculator: Calculator,
-  truck: Truck,
-}
+import { getIcon } from "@/lib/icon-map"
 
 // Default data (fallback)
 const defaultSection = {
@@ -16,19 +11,19 @@ const defaultSection = {
   items: [
     {
       num: "01",
-      icon: "fileText" as const,
+      icon: "Документ",
       title: "Заявка",
       description: "Оставьте заявку с подробностями: марка авто, место, проблема. Telegram-бот или мессенджер.",
     },
     {
       num: "02",
-      icon: "calculator" as const,
+      icon: "Калькулятор",
       title: "Расчёт и подтверждение",
       description: "Оператор называет точную цену и время подачи. Фиксируем заказ — без сюрпризов.",
     },
     {
       num: "03",
-      icon: "truck" as const,
+      icon: "Грузовик",
       title: "Подача и эвакуация",
       description: "Экипаж прибывает, аккуратно грузит, доставляет в нужную точку. Фотоотчёт в чат.",
     },
@@ -62,7 +57,7 @@ export function HowItWorks() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {steps.map((step, i) => {
-            const Icon = iconMap[step.icon] || FileText
+            const Icon = getIcon(step.icon, FileText)
             return (
               <div key={step._key || i} className="relative">
                 {/* Connector line */}

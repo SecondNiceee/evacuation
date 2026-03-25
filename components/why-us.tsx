@@ -1,14 +1,8 @@
 "use client"
 
-import { MessageSquare, DollarSign, Shield, Wrench } from "lucide-react"
+import { MessageSquare } from "lucide-react"
 import { useBenefitsSection } from "@/hooks/use-sanity"
-
-const iconMap = {
-  messageSquare: MessageSquare,
-  dollarSign: DollarSign,
-  shield: Shield,
-  wrench: Wrench,
-}
+import { getIcon } from "@/lib/icon-map"
 
 // Default data (fallback)
 const defaultSection = {
@@ -16,22 +10,22 @@ const defaultSection = {
   sectionTitle: "Мы сохраним ваши нервы и время",
   items: [
     {
-      icon: "messageSquare" as const,
+      icon: "Сообщение",
       title: "Удобный заказ",
       description: "Никаких колл-центров — напишите в VK, Max или создайте заявку через Telegram-бота.",
     },
     {
-      icon: "dollarSign" as const,
+      icon: "Доллар",
       title: "Честная цена",
       description: "Фикс в момент заказа, без «накруток на месте». Итоговая цена фиксируется до выезда.",
     },
     {
-      icon: "shield" as const,
+      icon: "Щит",
       title: "Ответственность",
       description: "Договор, фотофиксация авто до погрузки, страховка груза на весь маршрут.",
     },
     {
-      icon: "wrench" as const,
+      icon: "Гаечный ключ",
       title: "Опыт",
       description: "Водители со стажем 5+ лет, спецоснащение для сложных случаев и ДТП.",
     },
@@ -57,7 +51,7 @@ export function WhyUs() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {benefits.map((b, index) => {
-            const Icon = iconMap[b.icon] || MessageSquare
+            const Icon = getIcon(b.icon, MessageSquare)
             return (
               <div
                 key={b._key || index}
