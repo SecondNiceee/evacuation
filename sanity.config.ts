@@ -5,7 +5,7 @@ import { schemaTypes } from './sanity/schemas'
 
 export default defineConfig({
   name: 'default',
-  title: 'Evacuation',
+  title: 'Эвакуация',
 
   projectId: 'ddnpgu5d',
   dataset: 'production',
