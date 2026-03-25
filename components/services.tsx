@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { Car, Truck, AlertTriangle, Route } from "lucide-react"
-import { useServices } from "@/hooks/use-sanity"
+import { useServicesSection } from "@/hooks/use-sanity"
 import { urlFor } from "@/lib/sanity"
 
 const iconMap = {
@@ -13,54 +13,59 @@ const iconMap = {
 }
 
 // Default data (fallback)
-const defaultServices = [
-  {
-    icon: "car" as const,
-    title: "Легковые автомобили",
-    description: "До 2,5 тонн. Аккуратная погрузка, фиксация колёс, страховка груза.",
-    price: "От 2 500 ₽",
-    image: "/images/service-sedan.jpg",
-    orderUrl: "https://t.me/your_bot",
-  },
-  {
-    icon: "truck" as const,
-    title: "Грузовые и микроавтобусы",
-    description: "До 10 тонн. Манипуляторы, низкорамные платформы, работа с негабаритом.",
-    price: "От 4 500 ₽",
-    image: "/images/service-truck.jpg",
-    orderUrl: "https://t.me/your_bot",
-  },
-  {
-    icon: "alertTriangle" as const,
-    title: "После ДТП и сложные случаи",
-    description: "Вытаскиваем из кювета, сугробов, парковок. Работаем со страховыми.",
-    price: "Расчёт индивидуально",
-    image: "/images/service-crash.jpg",
-    orderUrl: "https://t.me/your_bot",
-  },
-  {
-    icon: "route" as const,
-    title: "Междугородняя эвакуация",
-    description: "Доставка по Ленинградской области и РФ. Прозрачный тариф за км.",
-    price: "От 50 ₽/км",
-    image: "/images/hero-tow.jpg",
-    orderUrl: "https://t.me/your_bot",
-  },
-]
+const defaultSection = {
+  sectionLabel: "Услуги",
+  sectionTitle: "Эвакуируем спецтехнику под ваши задачи",
+  items: [
+    {
+      icon: "car" as const,
+      title: "Легковые автомобили",
+      description: "До 2,5 тонн. Аккуратная погрузка, фиксация колёс, страховка груза.",
+      price: "От 2 500 ₽",
+      image: "/images/service-sedan.jpg",
+      orderUrl: "https://t.me/evacuator31bot",
+    },
+    {
+      icon: "truck" as const,
+      title: "Грузовые и микроавтобусы",
+      description: "До 10 тонн. Манипуляторы, низкорамные платформы, работа с негабаритом.",
+      price: "От 4 500 ₽",
+      image: "/images/service-truck.jpg",
+      orderUrl: "https://t.me/evacuator31bot",
+    },
+    {
+      icon: "alertTriangle" as const,
+      title: "После ДТП и сложные случаи",
+      description: "Вытаскиваем из кювета, сугробов, парковок. Работаем со страховыми.",
+      price: "Расчёт индивидуально",
+      image: "/images/service-crash.jpg",
+      orderUrl: "https://t.me/evacuator31bot",
+    },
+    {
+      icon: "route" as const,
+      title: "Междугородняя эвакуация",
+      description: "Доставка по Белгородской области и РФ. Прозрачный тариф за км.",
+      price: "От 50 ₽/км",
+      image: "/images/hero-tow.jpg",
+      orderUrl: "https://t.me/evacuator31bot",
+    },
+  ]
+}
 
 export function Services() {
-  const { data } = useServices()
-  const services = data && data.length > 0 ? data : defaultServices
+  const { data } = useServicesSection()
+  const section = data || defaultSection
+  const services = section.items || defaultSection.items
 
   return (
     <section id="services" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="mb-12">
           <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">
-            Услуги
+            {section.sectionLabel || defaultSection.sectionLabel}
           </p>
           <h2 className="font-mono font-bold text-3xl md:text-4xl text-foreground text-balance">
-            Эвакуируем спецтехнику под ваши задачи
+            {section.sectionTitle || defaultSection.sectionTitle}
           </h2>
         </div>
 
@@ -72,7 +77,7 @@ export function Services() {
               : "/images/hero-tow.jpg"
             return (
               <div
-                key={s._id || index}
+                key={s._key || index}
                 className="group relative overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300"
               >
                 {/* Image */}
@@ -105,7 +110,7 @@ export function Services() {
                       {s.price}
                     </span>
                     <a
-                      href={s.orderUrl || "https://t.me/your_bot"}
+                      href={s.orderUrl || "https://t.me/evacuator31bot"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary text-sm font-medium hover:underline"

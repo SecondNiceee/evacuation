@@ -3,14 +3,14 @@ import {
   sanityClient,
   queries,
   type SanityHero,
-  type SanityService,
-  type SanityBenefit,
-  type SanityStep,
+  type SanityServicesSection,
+  type SanityBenefitsSection,
+  type SanityStepsSection,
   type SanityNotice,
   type SanityPricing,
   type SanityZone,
   type SanityContactsSection,
-  type SanityFaq,
+  type SanityFaqSection,
   type SanityCta,
   type SanityFooter,
   type SanityNavbar,
@@ -31,16 +31,16 @@ export function useHero() {
   return useSWR<SanityHero>('hero', () => fetcher(queries.hero), swrConfig)
 }
 
-export function useServices() {
-  return useSWR<SanityService[]>('services', () => fetcher(queries.services), swrConfig)
+export function useServicesSection() {
+  return useSWR<SanityServicesSection>('servicesSection', () => fetcher(queries.servicesSection), swrConfig)
 }
 
-export function useBenefits() {
-  return useSWR<SanityBenefit[]>('benefits', () => fetcher(queries.benefits), swrConfig)
+export function useBenefitsSection() {
+  return useSWR<SanityBenefitsSection>('benefitsSection', () => fetcher(queries.benefitsSection), swrConfig)
 }
 
-export function useSteps() {
-  return useSWR<SanityStep[]>('steps', () => fetcher(queries.steps), swrConfig)
+export function useStepsSection() {
+  return useSWR<SanityStepsSection>('stepsSection', () => fetcher(queries.stepsSection), swrConfig)
 }
 
 export function useNotice() {
@@ -59,8 +59,8 @@ export function useContactsSection() {
   return useSWR<SanityContactsSection>('contactsSection', () => fetcher(queries.contactsSection), swrConfig)
 }
 
-export function useFaqs() {
-  return useSWR<SanityFaq[]>('faqs', () => fetcher(queries.faqs), swrConfig)
+export function useFaqSection() {
+  return useSWR<SanityFaqSection>('faqSection', () => fetcher(queries.faqSection), swrConfig)
 }
 
 export function useCta() {
