@@ -35,24 +35,6 @@ export const hero = {
       type: 'string',
       initialValue: 'Эвакуация 24/7'
     },
-    { 
-      name: 'telegramUrl', 
-      title: 'Ссылка Telegram', 
-      type: 'url',
-      initialValue: 'https://t.me/evacuator31bot'
-    },
-    { 
-      name: 'vkUrl', 
-      title: 'Ссылка VK', 
-      type: 'url',
-      initialValue: 'https://vk.me/evacuator31bot'
-    },
-    { 
-      name: 'maxUrl', 
-      title: 'Ссылка Max', 
-      type: 'url',
-      initialValue: 'https://max.com/evacuator31bot'
-    },
     { name: 'heroImage', title: 'Фоновое изображение', type: 'image' },
     {
       name: 'badges',
@@ -797,6 +779,37 @@ export const siteSettings = {
       type: 'array', 
       of: [{ type: 'string' }],
       initialValue: ['эвакуатор', 'белгород', 'эвакуация авто', 'эвакуатор 31']
+    },
+    {
+      name: 'socialLinks',
+      title: 'Социальные сети и контакты',
+      type: 'object',
+      fields: [
+        { 
+          name: 'telegramUrl', 
+          title: 'Ссылка Telegram', 
+          type: 'url',
+          initialValue: 'https://t.me/evacuator31bot'
+        },
+        { 
+          name: 'vkUrl', 
+          title: 'Ссылка VK', 
+          type: 'url',
+          initialValue: 'https://vk.me/evacuator31bot'
+        },
+        { 
+          name: 'maxUrl', 
+          title: 'Ссылка Max', 
+          type: 'url',
+          initialValue: 'https://max.com/evacuator31bot'
+        },
+        { 
+          name: 'phoneNumber', 
+          title: 'Номер телефона', 
+          type: 'string',
+          initialValue: '+7-921-431-2020'
+        }
+      ]
     }
   ]
 }

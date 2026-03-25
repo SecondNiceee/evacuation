@@ -25,9 +25,6 @@ export interface SanityHero {
   titleHighlight2: string
   subtitle: string
   tagText: string
-  telegramUrl: string
-  vkUrl: string
-  maxUrl: string
   heroImage?: SanityImageSource
   badges: Array<{
     _key: string
@@ -163,19 +160,11 @@ export interface SanityCta {
   _id: string
   title: string
   description: string
-  telegramUrl: string
-  telegramText: string
-  vkUrl: string
-  vkText: string
-  maxUrl: string
-  maxText: string
 }
 
 export interface SanityFooter {
   _id: string
   cityText: string
-  telegramUrl: string
-  vkUrl: string
 }
 
 export interface SanityNavbar {
@@ -196,6 +185,12 @@ export interface SanitySiteSettings {
   siteTitle: string
   siteDescription: string
   keywords: string[]
+  socialLinks: {
+    telegramUrl: string
+    vkUrl: string
+    maxUrl: string
+    phoneNumber: string
+  }
 }
 
 // GROQ Queries - Singletons use fixed document IDs
