@@ -1,38 +1,57 @@
+"use client"
+
 import Image from "next/image"
 import { Car, Truck, AlertTriangle, Route } from "lucide-react"
+import { useServices } from "@/hooks/use-sanity"
+import { urlFor } from "@/lib/sanity"
 
-const services = [
+const iconMap = {
+  car: Car,
+  truck: Truck,
+  alertTriangle: AlertTriangle,
+  route: Route,
+}
+
+// Default data (fallback)
+const defaultServices = [
   {
-    icon: Car,
+    icon: "car" as const,
     title: "Легковые автомобили",
     description: "До 2,5 тонн. Аккуратная погрузка, фиксация колёс, страховка груза.",
     price: "От 2 500 ₽",
     image: "/images/service-sedan.jpg",
+    orderUrl: "https://t.me/your_bot",
   },
   {
-    icon: Truck,
+    icon: "truck" as const,
     title: "Грузовые и микроавтобусы",
     description: "До 10 тонн. Манипуляторы, низкорамные платформы, работа с негабаритом.",
     price: "От 4 500 ₽",
     image: "/images/service-truck.jpg",
+    orderUrl: "https://t.me/your_bot",
   },
   {
-    icon: AlertTriangle,
+    icon: "alertTriangle" as const,
     title: "После ДТП и сложные случаи",
     description: "Вытаскиваем из кювета, сугробов, парковок. Работаем со страховыми.",
     price: "Расчёт индивидуально",
     image: "/images/service-crash.jpg",
+    orderUrl: "https://t.me/your_bot",
   },
   {
-    icon: Route,
+    icon: "route" as const,
     title: "Междугородняя эвакуация",
     description: "Доставка по Ленинградской области и РФ. Прозрачный тариф за км.",
     price: "От 50 ₽/км",
     image: "/images/hero-tow.jpg",
+    orderUrl: "https://t.me/your_bot",
   },
 ]
 
 export function Services() {
+  const { data } = useServices()
+  const services = data && data.length > 0 ? data : defaultServices
+
   return (
     <section id="services" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -46,17 +65,20 @@ export function Services() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {services.map((s) => {
-            const Icon = s.icon
+          {services.map((s, index) => {
+            const Icon = iconMap[s.icon] || Car
+            const imageUrl = s.image 
+              ? (typeof s.image === 'string' ? s.image : urlFor(s.image).url())
+              : "/images/hero-tow.jpg"
             return (
               <div
-                key={s.title}
+                key={s._id || index}
                 className="group relative overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-300"
               >
                 {/* Image */}
                 <div className="relative h-52 overflow-hidden">
                   <Image
-                    src={s.image}
+                    src={imageUrl}
                     alt={s.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -83,7 +105,7 @@ export function Services() {
                       {s.price}
                     </span>
                     <a
-                      href="https://t.me/your_bot"
+                      href={s.orderUrl || "https://t.me/your_bot"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary text-sm font-medium hover:underline"

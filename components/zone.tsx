@@ -1,14 +1,34 @@
+"use client"
+
 import Image from "next/image"
 import { MapPin } from "lucide-react"
+import { useZone } from "@/hooks/use-sanity"
+import { urlFor } from "@/lib/sanity"
 
-const areas = [
-  "Все районы СПб: от Курортного до Колпино",
-  "Кольцевые трассы: КАД, ЗСД, Мурманское, Киевское шоссе",
-  "Ленинградская область: до 100 км — без наценок",
-  "Междугород: рассчитаем маршрут под ваш бюджет",
+// Default data (fallback)
+const defaultAreas = [
+  { text: "Все районы СПб: от Курортного до Колпино" },
+  { text: "Кольцевые трассы: КАД, ЗСД, Мурманское, Киевское шоссе" },
+  { text: "Ленинградская область: до 100 км — без наценок" },
+  { text: "Междугород: рассчитаем маршрут под ваш бюджет" },
 ]
 
+const defaultZone = {
+  sectionTitle: "Зона работы",
+  sectionSubtitle: "Работаем по всему Санкт-Петербургу и Ленобласти",
+  areas: defaultAreas,
+  tipText: "Отправьте геолокацию в чате Telegram — покажем, сколько минут до вас едет ближайший экипаж.",
+  badgeTitle: "Ближайший экипаж",
+  badgeSubtitle: "Среднее время подачи: 20-40 мин",
+}
+
 export function Zone() {
+  const { data } = useZone()
+  const zone = data || defaultZone
+  const areas = zone.areas && zone.areas.length > 0 ? zone.areas : defaultAreas
+
+  const imageUrl = zone.image ? urlFor(zone.image).url() : "/images/spb-city.jpg"
+
   return (
     <section id="zone" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -16,17 +36,17 @@ export function Zone() {
           {/* Text */}
           <div>
             <p className="text-primary text-sm font-semibold uppercase tracking-widest mb-3">
-              Зона работы
+              {zone.sectionTitle}
             </p>
             <h2 className="font-mono font-bold text-3xl md:text-4xl text-foreground mb-6 text-balance">
-              Работаем по всему Санкт-Петербургу и Ленобласти
+              {zone.sectionSubtitle}
             </h2>
 
             <ul className="flex flex-col gap-4 mb-8">
-              {areas.map((area) => (
-                <li key={area} className="flex items-start gap-3">
+              {areas.map((area, index) => (
+                <li key={area._key || index} className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span className="text-muted-foreground leading-relaxed">{area}</span>
+                  <span className="text-muted-foreground leading-relaxed">{area.text}</span>
                 </li>
               ))}
             </ul>
@@ -34,7 +54,7 @@ export function Zone() {
             <div className="rounded-xl border border-primary/20 bg-primary/5 p-5 flex gap-3">
               <span className="text-xl">📍</span>
               <p className="text-sm text-foreground leading-relaxed">
-                Отправьте геолокацию в чате Telegram — покажем, сколько минут до вас едет ближайший экипаж.
+                {zone.tipText}
               </p>
             </div>
           </div>
@@ -42,7 +62,7 @@ export function Zone() {
           {/* Image */}
           <div className="relative h-80 lg:h-[480px] rounded-2xl overflow-hidden border border-border">
             <Image
-              src="/images/spb-city.jpg"
+              src={imageUrl}
               alt="Санкт-Петербург ночью"
               fill
               className="object-cover"
@@ -54,8 +74,8 @@ export function Zone() {
                 <MapPin className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <p className="text-foreground font-semibold text-sm">Ближайший экипаж</p>
-                <p className="text-muted-foreground text-xs">Среднее время подачи: 20-40 мин</p>
+                <p className="text-foreground font-semibold text-sm">{zone.badgeTitle}</p>
+                <p className="text-muted-foreground text-xs">{zone.badgeSubtitle}</p>
               </div>
               <div className="ml-auto flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />

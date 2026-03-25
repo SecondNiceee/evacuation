@@ -2,36 +2,40 @@
 
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
+import { useFaqs } from "@/hooks/use-sanity"
 
-const faqs = [
+// Default data (fallback)
+const defaultFaqs = [
   {
-    q: "Сколько ждать эвакуатор?",
-    a: "В среднем 20-40 минут. Точное время назовём после получения вашей геолокации.",
+    question: "Сколько ждать эвакуатор?",
+    answer: "В среднем 20-40 минут. Точное время назовём после получения вашей геолокации.",
   },
   {
-    q: "Как происходит оплата?",
-    a: "Наличные, карта, перевод. Чек предоставляется. Возможна оплата после доставки.",
+    question: "Как происходит оплата?",
+    answer: "Наличные, карта, перевод. Чек предоставляется. Возможна оплата после доставки.",
   },
   {
-    q: "Что если авто не на ходу?",
-    a: "Укажите это в заявке — приедет платформа с лебёдкой или манипулятор.",
+    question: "Что если авто не на ходу?",
+    answer: "Укажите это в заявке — приедет платформа с лебёдкой или манипулятор.",
   },
   {
-    q: "Работаете с юрлицами?",
-    a: "Да, предоставляем договор, акты, работаем с НДС.",
+    question: "Работаете с юрлицами?",
+    answer: "Да, предоставляем договор, акты, работаем с НДС.",
   },
   {
-    q: "Работаете ли вы ночью и в праздники?",
-    a: "Да, круглосуточно и без выходных — 365 дней в году.",
+    question: "Работаете ли вы ночью и в праздники?",
+    answer: "Да, круглосуточно и без выходных — 365 дней в году.",
   },
   {
-    q: "Можно ли отследить эвакуатор?",
-    a: "Да, через Telegram-бот вы получите ссылку для отслеживания местоположения экипажа.",
+    question: "Можно ли отследить эвакуатор?",
+    answer: "Да, через Telegram-бот вы получите ссылку для отслеживания местоположения экипажа.",
   },
 ]
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(null)
+  const { data } = useFaqs()
+  const faqs = data && data.length > 0 ? data : defaultFaqs
 
   return (
     <section className="py-24 bg-background">
@@ -46,7 +50,7 @@ export function FAQ() {
         <div className="flex flex-col gap-3">
           {faqs.map((item, i) => (
             <div
-              key={i}
+              key={item._id || i}
               className="rounded-2xl border border-border bg-card overflow-hidden"
             >
               <button
@@ -54,7 +58,7 @@ export function FAQ() {
                 onClick={() => setOpen(open === i ? null : i)}
                 aria-expanded={open === i}
               >
-                <span className="font-semibold text-foreground">{item.q}</span>
+                <span className="font-semibold text-foreground">{item.question}</span>
                 <ChevronDown
                   className={`w-5 h-5 text-muted-foreground transition-transform duration-300 shrink-0 ml-4 ${
                     open === i ? "rotate-180" : ""
@@ -68,7 +72,7 @@ export function FAQ() {
               >
                 <div className="overflow-hidden">
                   <div className="px-6 pb-5 text-muted-foreground text-sm leading-relaxed border-t border-border pt-4">
-                    {item.a}
+                    {item.answer}
                   </div>
                 </div>
               </div>

@@ -1,19 +1,48 @@
+"use client"
+
 import Image from "next/image"
 import { Clock, MapPin, Bot } from "lucide-react"
+import { useHero } from "@/hooks/use-sanity"
+import { urlFor } from "@/lib/sanity"
 
-const badges = [
-  { icon: Clock, text: "Подача от 20 минут (24/7)" },
-  { icon: MapPin, text: "Работаем по всему СПб" },
-  { icon: Bot, text: "Заказ в Telegram-боте" },
+const iconMap = {
+  clock: Clock,
+  mapPin: MapPin,
+  bot: Bot,
+}
+
+// Default data (fallback)
+const defaultBadges = [
+  { icon: "clock" as const, text: "Подача от 20 минут (24/7)" },
+  { icon: "mapPin" as const, text: "Работаем по всему СПб" },
+  { icon: "bot" as const, text: "Заказ в Telegram-боте" },
 ]
 
+const defaultHero = {
+  title: "Эвакуатор в СПб —",
+  titleHighlight1: "быстро",
+  titleHighlight2: "надёжно",
+  subtitle: "Подача машины от 20 минут. Легковые, грузовые, после ДТП, из труднодоступных мест — работаем 24/7.",
+  tagText: "Санкт-Петербург — круглосуточно",
+  telegramUrl: "https://t.me/your_bot",
+  vkUrl: "https://vk.com/your_group",
+  maxUrl: "https://max.ru/your_group",
+  badges: defaultBadges,
+}
+
 export function Hero() {
+  const { data } = useHero()
+  const hero = data || defaultHero
+  const badges = hero.badges || defaultBadges
+
+  const heroImageUrl = hero.heroImage ? urlFor(hero.heroImage).url() : "/images/hero-tow.jpg"
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/hero-tow.jpg"
+          src={heroImageUrl}
           alt="Эвакуатор в Санкт-Петербурге ночью"
           fill
           priority
@@ -29,24 +58,23 @@ export function Hero() {
           {/* Tag */}
           <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            Санкт-Петербург — круглосуточно
+            {hero.tagText}
           </div>
 
           <h1 className="font-mono font-bold text-4xl md:text-6xl lg:text-7xl text-foreground leading-tight text-balance mb-6">
-            Эвакуатор в СПб —<br />
-            <span className="text-primary">быстро</span> и{" "}
-            <span style={{ color: "oklch(0.78 0.18 70)" }}>надёжно</span>
+            {hero.title}<br />
+            <span className="text-primary">{hero.titleHighlight1}</span> и{" "}
+            <span style={{ color: "oklch(0.78 0.18 70)" }}>{hero.titleHighlight2}</span>
           </h1>
 
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed mb-10 max-w-xl text-pretty">
-            Подача машины от 20 минут. Легковые, грузовые, после ДТП,
-            из труднодоступных мест — работаем 24/7.
+            {hero.subtitle}
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-3 mb-12">
             <a
-              href="https://t.me/your_bot"
+              href={hero.telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-primary/90 transition-all shadow-lg shadow-primary/25"
@@ -57,7 +85,7 @@ export function Hero() {
               Заказать в Telegram
             </a>
             <a
-              href="https://vk.com/your_group"
+              href={hero.vkUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-secondary text-foreground border border-border px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-secondary/80 transition-all"
@@ -68,7 +96,7 @@ export function Hero() {
               Написать во VK
             </a>
             <a
-              href="https://max.ru/your_group"
+              href={hero.maxUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-secondary text-foreground border border-border px-6 py-3.5 rounded-xl font-semibold text-base hover:bg-secondary/80 transition-all"
@@ -79,15 +107,18 @@ export function Hero() {
 
           {/* Badges */}
           <div className="flex flex-wrap gap-3">
-            {badges.map(({ icon: Icon, text }) => (
-              <div
-                key={text}
-                className="flex items-center gap-2 bg-card/80 backdrop-blur border border-border rounded-lg px-4 py-2.5"
-              >
-                <Icon className="w-4 h-4 text-primary shrink-0" />
-                <span className="text-sm text-foreground">{text}</span>
-              </div>
-            ))}
+            {badges.map((badge, index) => {
+              const Icon = iconMap[badge.icon] || Clock
+              return (
+                <div
+                  key={badge._key || index}
+                  className="flex items-center gap-2 bg-card/80 backdrop-blur border border-border rounded-lg px-4 py-2.5"
+                >
+                  <Icon className="w-4 h-4 text-primary shrink-0" />
+                  <span className="text-sm text-foreground">{badge.text}</span>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

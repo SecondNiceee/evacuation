@@ -1,30 +1,51 @@
-import { FileText, Calculator, Truck } from "lucide-react"
+"use client"
 
-const steps = [
+import { FileText, Calculator, Truck } from "lucide-react"
+import { useSteps, useNotice } from "@/hooks/use-sanity"
+
+const iconMap = {
+  fileText: FileText,
+  calculator: Calculator,
+  truck: Truck,
+}
+
+// Default data (fallback)
+const defaultSteps = [
   {
     num: "01",
-    icon: FileText,
+    icon: "fileText" as const,
     title: "Заявка",
     description:
       "Оставьте заявку с подробностями: марка авто, место, проблема. Telegram-бот или мессенджер.",
   },
   {
     num: "02",
-    icon: Calculator,
+    icon: "calculator" as const,
     title: "Расчёт и подтверждение",
     description:
       "Оператор называет точную цену и время подачи. Фиксируем заказ — без сюрпризов.",
   },
   {
     num: "03",
-    icon: Truck,
+    icon: "truck" as const,
     title: "Подача и эвакуация",
     description:
       "Экипаж прибывает, аккуратно грузит, доставляет в нужную точку. Фотоотчёт в чат.",
   },
 ]
 
+const defaultNotice = {
+  title: "Важно знать",
+  description: "Если авто после ДТП — не пытайтесь заводить его. Пришлите фото повреждений в чат — мы подберём нужный тип платформы и согласуем работу со страховой.",
+}
+
 export function HowItWorks() {
+  const { data: stepsData } = useSteps()
+  const { data: noticeData } = useNotice()
+
+  const steps = stepsData && stepsData.length > 0 ? stepsData : defaultSteps
+  const notice = noticeData || defaultNotice
+
   return (
     <section id="how" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -39,9 +60,9 @@ export function HowItWorks() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
           {steps.map((step, i) => {
-            const Icon = step.icon
+            const Icon = iconMap[step.icon] || FileText
             return (
-              <div key={step.num} className="relative">
+              <div key={step._id || i} className="relative">
                 {/* Connector line */}
                 {i < steps.length - 1 && (
                   <div className="hidden md:block absolute top-8 left-[calc(100%_-_1rem)] w-8 h-px bg-primary/30 z-10" />
@@ -70,10 +91,9 @@ export function HowItWorks() {
         <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6 flex gap-4">
           <span className="text-2xl shrink-0">⚠️</span>
           <div>
-            <p className="font-semibold text-foreground mb-1">Важно знать</p>
+            <p className="font-semibold text-foreground mb-1">{notice.title}</p>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Если авто после ДТП — не пытайтесь заводить его. Пришлите фото повреждений в чат —
-              мы подберём нужный тип платформы и согласуем работу со страховой.
+              {notice.description}
             </p>
           </div>
         </div>

@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { Menu, X, Truck } from "lucide-react"
+import { useNavbar } from "@/hooks/use-sanity"
 
-const navLinks = [
+// Default data (fallback)
+const defaultNavLinks = [
   { label: "Услуги", href: "#services" },
   { label: "Цены", href: "#pricing" },
   { label: "Как работаем", href: "#how" },
@@ -11,9 +13,21 @@ const navLinks = [
   { label: "Контакты", href: "#contacts" },
 ]
 
+const defaultData = {
+  logoText: "Эвак",
+  logoHighlight: "СПб",
+  orderButtonText: "Заказать",
+  orderButtonUrl: "https://t.me/your_bot",
+  links: defaultNavLinks,
+}
+
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { data } = useNavbar()
+
+  const navbar = data || defaultData
+  const navLinks = navbar.links || defaultNavLinks
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40)
@@ -34,7 +48,7 @@ export function Navbar() {
             <Truck className="w-5 h-5 text-primary-foreground" />
           </div>
           <span className="font-mono font-bold text-foreground tracking-tight text-lg">
-            Эвак<span className="text-primary">СПб</span>
+            {navbar.logoText}<span className="text-primary">{navbar.logoHighlight}</span>
           </span>
         </a>
 
@@ -53,12 +67,12 @@ export function Navbar() {
 
         {/* CTA */}
         <a
-          href="https://t.me/your_bot"
+          href={navbar.orderButtonUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors"
         >
-          Заказать
+          {navbar.orderButtonText}
         </a>
 
         {/* Mobile toggle */}
@@ -85,7 +99,7 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="https://t.me/your_bot"
+            href={navbar.orderButtonUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-primary text-primary-foreground text-center py-3 rounded-lg font-semibold"

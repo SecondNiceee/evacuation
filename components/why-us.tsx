@@ -1,30 +1,44 @@
-import { MessageSquare, DollarSign, Shield, Wrench } from "lucide-react"
+"use client"
 
-const benefits = [
+import { MessageSquare, DollarSign, Shield, Wrench } from "lucide-react"
+import { useBenefits } from "@/hooks/use-sanity"
+
+const iconMap = {
+  messageSquare: MessageSquare,
+  dollarSign: DollarSign,
+  shield: Shield,
+  wrench: Wrench,
+}
+
+// Default data (fallback)
+const defaultBenefits = [
   {
-    icon: MessageSquare,
+    icon: "messageSquare" as const,
     title: "Удобный заказ",
     description:
       "Никаких колл-центров — напишите в VK, Max или создайте заявку через Telegram-бота.",
   },
   {
-    icon: DollarSign,
+    icon: "dollarSign" as const,
     title: "Честная цена",
     description: "Фикс в момент заказа, без «накруток на месте». Итоговая цена фиксируется до выезда.",
   },
   {
-    icon: Shield,
+    icon: "shield" as const,
     title: "Ответственность",
     description: "Договор, фотофиксация авто до погрузки, страховка груза на весь маршрут.",
   },
   {
-    icon: Wrench,
+    icon: "wrench" as const,
     title: "Опыт",
     description: "Водители со стажем 5+ лет, спецоснащение для сложных случаев и ДТП.",
   },
 ]
 
 export function WhyUs() {
+  const { data } = useBenefits()
+  const benefits = data && data.length > 0 ? data : defaultBenefits
+
   return (
     <section className="py-24 bg-card">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -38,11 +52,11 @@ export function WhyUs() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((b) => {
-            const Icon = b.icon
+          {benefits.map((b, index) => {
+            const Icon = iconMap[b.icon] || MessageSquare
             return (
               <div
-                key={b.title}
+                key={b._id || index}
                 className="bg-background rounded-2xl border border-border p-6 hover:border-primary/40 transition-colors"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-5">
