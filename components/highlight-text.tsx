@@ -12,12 +12,15 @@ interface HighlightTextProps {
 }
 
 export function HighlightText({ text, highlights, className = '' }: HighlightTextProps) {
-  if (!highlights || highlights.length === 0) {
+  // Filter out empty or undefined words first
+  const validHighlights = highlights?.filter(h => h.word && h.word.trim().length > 0) || []
+  
+  if (validHighlights.length === 0) {
     return <span className={className}>{text}</span>
   }
 
   // Sort highlights by word length (longest first) to handle overlapping words correctly
-  const sortedHighlights = [...highlights].sort((a, b) => b.word.length - a.word.length)
+  const sortedHighlights = [...validHighlights].sort((a, b) => b.word.length - a.word.length)
 
   // Create regex pattern for all highlight words
   const pattern = sortedHighlights
@@ -25,6 +28,10 @@ export function HighlightText({ text, highlights, className = '' }: HighlightTex
     .join('|')
   
   const regex = new RegExp(`(${pattern})`, 'gi')
+  
+  console.log("[v0] HighlightText - text:", text)
+  console.log("[v0] HighlightText - validHighlights:", validHighlights)
+  console.log("[v0] HighlightText - pattern:", pattern)
 
   // Split text and map highlights
   const parts = text.split(regex)
