@@ -22,9 +22,10 @@ const fetcher = <T>(query: string): Promise<T> => sanityClient.fetch(query)
 
 // SWR config for client-side fetching
 const swrConfig = {
-  revalidateOnFocus: false,
-  revalidateOnReconnect: false,
-  dedupingInterval: 60000, // 1 minute
+  revalidateOnFocus: true,       // Refetch when user returns to tab
+  revalidateOnReconnect: true,   // Refetch on reconnect
+  dedupingInterval: 5000,        // 5 seconds deduplication
+  refreshInterval: 0,            // No auto-refresh (set to e.g. 30000 for 30s polling)
 }
 
 export function useHero() {
