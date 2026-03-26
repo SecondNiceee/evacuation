@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Clock } from "lucide-react"
 import { useHero, useSiteSettings } from "@/hooks/use-sanity"
@@ -24,6 +25,16 @@ const defaultSocialLinks = {
 export function Hero() {
   const { data: hero } = useHero()
   const { data: settings } = useSiteSettings()
+  const [isRevealed, setIsRevealed] = useState(false)
+  
+  // Reveal animation when hero data is loaded
+  useEffect(() => {
+    if (hero) {
+      // Small delay to ensure smooth transition
+      const timer = setTimeout(() => setIsRevealed(true), 50)
+      return () => clearTimeout(timer)
+    }
+  }, [hero])
   
   const socialLinks = settings?.socialLinks || defaultSocialLinks
   const badges = hero?.badges || defaultBadges
@@ -32,8 +43,17 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Dark overlay that fades out when content loads */}
+      <div 
+        className={`absolute inset-0 z-50 bg-background pointer-events-none transition-opacity duration-700 ease-out ${
+          isRevealed ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
+      
       {/* Background image */}
-      <div className="absolute inset-0 z-0">
+      <div className={`absolute inset-0 z-0 transition-opacity duration-1000 ease-out ${
+        isRevealed ? 'opacity-100' : 'opacity-0'
+      }`}>
         <Image
           src={heroImageUrl}
           alt="Эвакуатор в Санкт-Петербурге ночью"
@@ -50,7 +70,9 @@ export function Hero() {
         <div className="max-w-3xl">
           {/* Tag - only render when data is loaded */}
           {hero?.tagText && (
-            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+            <div className={`inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6 transition-all duration-700 delay-100 ${
+              isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}>
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               {hero.tagText}
             </div>
@@ -58,7 +80,9 @@ export function Hero() {
 
           {/* H1 - only render when data is loaded (no fallback for SEO) */}
           {hero?.title && (
-            <h1 className="font-mono font-bold text-4xl md:text-6xl lg:text-7xl text-foreground leading-tight text-balance mb-6">
+            <h1 className={`font-mono font-bold text-4xl md:text-6xl lg:text-7xl text-foreground leading-tight text-balance mb-6 transition-all duration-700 delay-200 ${
+              isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}>
               <HighlightText
                 text={hero.title}
                 highlights={[
@@ -71,13 +95,17 @@ export function Hero() {
 
           {/* Subtitle - only render when data is loaded */}
           {hero?.subtitle && (
-            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed mb-10 max-w-xl text-pretty">
+            <p className={`text-muted-foreground text-lg md:text-xl leading-relaxed mb-10 max-w-xl text-pretty transition-all duration-700 delay-300 ${
+              isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}>
               {hero.subtitle}
             </p>
           )}
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-3 mb-12">
+          <div className={`flex flex-wrap gap-3 mb-12 transition-all duration-700 delay-400 ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}>
             <a
               href={socialLinks.telegramUrl}
               target="_blank"
@@ -111,7 +139,9 @@ export function Hero() {
           </div>
 
           {/* Badges */}
-          <div className="flex flex-wrap gap-3">
+          <div className={`flex flex-wrap gap-3 transition-all duration-700 delay-500 ${
+            isRevealed ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}>
             {badges.map((badge, index) => {
               const Icon = getIcon(badge.icon, Clock)
               return (
