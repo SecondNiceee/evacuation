@@ -20,28 +20,6 @@ import {
 // Generic fetcher for Sanity
 const fetcher = <T>(query: string): Promise<T> => sanityClient.fetch(query)
 
-// Server-side fetch functions (for SSG/SSR)
-export async function fetchHero(): Promise<SanityHero | null> {
-  return sanityClient.fetch(queries.hero)
-}
-
-export async function fetchSiteSettings(): Promise<SanitySiteSettings | null> {
-  return sanityClient.fetch(queries.siteSettings)
-}
-
-export async function fetchNavbar(): Promise<SanityNavbar | null> {
-  return sanityClient.fetch(queries.navbar)
-}
-
-export async function fetchAllInitialData() {
-  const [hero, siteSettings, navbar] = await Promise.all([
-    fetchHero(),
-    fetchSiteSettings(),
-    fetchNavbar(),
-  ])
-  return { hero, siteSettings, navbar }
-}
-
 // SWR config for client-side fetching
 const swrConfig = {
   revalidateOnFocus: true,       // Refetch when user returns to tab
@@ -50,11 +28,8 @@ const swrConfig = {
   refreshInterval: 0,            // No auto-refresh (set to e.g. 30000 for 30s polling)
 }
 
-export function useHero(initialData?: SanityHero) {
-  return useSWR<SanityHero>('hero', () => fetcher(queries.hero), {
-    ...swrConfig,
-    fallbackData: initialData,
-  })
+export function useHero() {
+  return useSWR<SanityHero>('hero', () => fetcher(queries.hero), swrConfig)
 }
 
 export function useServicesSection() {
@@ -101,9 +76,6 @@ export function useNavbar() {
   return useSWR<SanityNavbar>('navbar', () => fetcher(queries.navbar), swrConfig)
 }
 
-export function useSiteSettings(initialData?: SanitySiteSettings) {
-  return useSWR<SanitySiteSettings>('siteSettings', () => fetcher(queries.siteSettings), {
-    ...swrConfig,
-    fallbackData: initialData,
-  })
+export function useSiteSettings() {
+  return useSWR<SanitySiteSettings>('siteSettings', () => fetcher(queries.siteSettings), swrConfig)
 }

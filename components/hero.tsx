@@ -3,25 +3,16 @@
 import Image from "next/image"
 import { Clock } from "lucide-react"
 import { useHero, useSiteSettings } from "@/hooks/use-sanity"
-import { urlFor, type SanityHero, type SanitySiteSettings } from "@/lib/sanity"
+import { urlFor } from "@/lib/sanity"
 import { getIcon } from "@/lib/icon-map"
 import { HighlightText } from "@/components/highlight-text"
 
-// Default data (fallback)
+// Default data (fallback) - used for non-SEO-critical elements only
 const defaultBadges = [
   { icon: "Часы", text: "Подача от 20 минут (24/7)" },
   { icon: "Метка на карте", text: "Работаем по всему СПб" },
   { icon: "Робот", text: "Заказ в Telegram-боте" },
 ]
-
-const defaultHero = {
-  title: "Эвакуатор в СПб —",
-  titleHighlight1: "быстро",
-  titleHighlight2: "надёжно",
-  subtitle: "Подача машины от 20 минут. Легковые, грузовые, после ДТП, из труднодоступных мест — работаем 24/7.",
-  tagText: "Санкт-Петербург — круглосуточно",
-  badges: defaultBadges,
-}
 
 const defaultSocialLinks = {
   telegramUrl: "https://t.me/your_bot",
@@ -30,20 +21,14 @@ const defaultSocialLinks = {
   phoneNumber: "+7-921-431-2020",
 }
 
-interface HeroProps {
-  initialHero?: SanityHero | null
-  initialSettings?: SanitySiteSettings | null
-}
-
-export function Hero({ initialHero, initialSettings }: HeroProps) {
-  const { data: hero } = useHero(initialHero || undefined)
-  const { data: settings } = useSiteSettings(initialSettings || undefined)
+export function Hero() {
+  const { data: hero } = useHero()
+  const { data: settings } = useSiteSettings()
   
-  const heroData = hero || defaultHero
   const socialLinks = settings?.socialLinks || defaultSocialLinks
-  const badges = heroData.badges || defaultBadges
+  const badges = hero?.badges || defaultBadges
 
-  const heroImageUrl = heroData.heroImage ? urlFor(heroData.heroImage).url() : "/images/hero-tow.jpg"
+  const heroImageUrl = hero?.heroImage ? urlFor(hero.heroImage).url() : "/images/hero-tow.jpg"
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -63,25 +48,33 @@ export function Hero({ initialHero, initialSettings }: HeroProps) {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 pt-24 pb-16 w-full">
         <div className="max-w-3xl">
-          {/* Tag */}
-          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            {heroData.tagText}
-          </div>
+          {/* Tag - only render when data is loaded */}
+          {hero?.tagText && (
+            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 text-primary px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              {hero.tagText}
+            </div>
+          )}
 
-          <h1 className="font-mono font-bold text-4xl md:text-6xl lg:text-7xl text-foreground leading-tight text-balance mb-6">
-            <HighlightText
-              text={heroData.title}
-              highlights={[
-                { word: heroData.titleHighlight1, color: "hsl(var(--primary))" },
-                { word: heroData.titleHighlight2, color: "oklch(0.78 0.18 70)" },
-              ]}
-            />
-          </h1>
+          {/* H1 - only render when data is loaded (no fallback for SEO) */}
+          {hero?.title && (
+            <h1 className="font-mono font-bold text-4xl md:text-6xl lg:text-7xl text-foreground leading-tight text-balance mb-6">
+              <HighlightText
+                text={hero.title}
+                highlights={[
+                  { word: hero.titleHighlight1, color: "hsl(var(--primary))" },
+                  { word: hero.titleHighlight2, color: "oklch(0.78 0.18 70)" },
+                ]}
+              />
+            </h1>
+          )}
 
-          <p className="text-muted-foreground text-lg md:text-xl leading-relaxed mb-10 max-w-xl text-pretty">
-            {heroData.subtitle}
-          </p>
+          {/* Subtitle - only render when data is loaded */}
+          {hero?.subtitle && (
+            <p className="text-muted-foreground text-lg md:text-xl leading-relaxed mb-10 max-w-xl text-pretty">
+              {hero.subtitle}
+            </p>
+          )}
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-3 mb-12">

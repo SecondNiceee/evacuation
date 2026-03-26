@@ -8,20 +8,12 @@ import { Zone } from "@/components/zone"
 import { Contacts } from "@/components/contacts"
 import { FAQ } from "@/components/faq"
 import { CTA, Footer } from "@/components/cta"
-import { fetchHero, fetchSiteSettings } from "@/hooks/use-sanity"
 
-// This runs at build time for static export
-export default async function Page() {
-  // Fetch data at build time (SSG)
-  const [hero, siteSettings] = await Promise.all([
-    fetchHero(),
-    fetchSiteSettings(),
-  ])
-
+export default function Page() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      <Hero initialHero={hero} initialSettings={siteSettings} />
+      <Hero />
       <Services />
       <WhyUs />
       <HowItWorks />
