@@ -1,5 +1,3 @@
-"use client"
-
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { Services } from "@/components/services"
@@ -10,12 +8,20 @@ import { Zone } from "@/components/zone"
 import { Contacts } from "@/components/contacts"
 import { FAQ } from "@/components/faq"
 import { CTA, Footer } from "@/components/cta"
+import { fetchHero, fetchSiteSettings } from "@/hooks/use-sanity"
 
-export default function Page() {
+// This runs at build time for static export
+export default async function Page() {
+  // Fetch data at build time (SSG)
+  const [hero, siteSettings] = await Promise.all([
+    fetchHero(),
+    fetchSiteSettings(),
+  ])
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      <Hero />
+      <Hero initialHero={hero} initialSettings={siteSettings} />
       <Services />
       <WhyUs />
       <HowItWorks />

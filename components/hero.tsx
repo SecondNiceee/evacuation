@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { Clock } from "lucide-react"
 import { useHero, useSiteSettings } from "@/hooks/use-sanity"
-import { urlFor } from "@/lib/sanity"
+import { urlFor, type SanityHero, type SanitySiteSettings } from "@/lib/sanity"
 import { getIcon } from "@/lib/icon-map"
 import { HighlightText } from "@/components/highlight-text"
 
@@ -30,8 +30,13 @@ const defaultSocialLinks = {
   phoneNumber: "+7-921-431-2020",
 }
 
-export function Hero() {
-  const { data: hero } = useHero()
+interface HeroProps {
+  initialHero?: SanityHero | null
+  initialSettings?: SanitySiteSettings | null
+}
+
+export function Hero({ initialHero, initialSettings }: HeroProps) {
+  const { data: hero } = useHero(initialHero || undefined)
   const { data: settings } = useSiteSettings()
   
   const heroData = hero || defaultHero
