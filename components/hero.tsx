@@ -5,6 +5,7 @@ import { Clock } from "lucide-react"
 import { useHero, useSiteSettings } from "@/hooks/use-sanity"
 import { urlFor } from "@/lib/sanity"
 import { getIcon } from "@/lib/icon-map"
+import { HighlightText } from "@/components/highlight-text"
 
 // Default data (fallback)
 const defaultBadges = [
@@ -64,9 +65,13 @@ export function Hero() {
           </div>
 
           <h1 className="font-mono font-bold text-4xl md:text-6xl lg:text-7xl text-foreground leading-tight text-balance mb-6">
-            {heroData.title}<br />
-            <span className="text-primary">{heroData.titleHighlight1}</span> и{" "}
-            <span style={{ color: "oklch(0.78 0.18 70)" }}>{heroData.titleHighlight2}</span>
+            <HighlightText
+              text={heroData.title}
+              highlights={[
+                { word: heroData.titleHighlight1, color: "hsl(var(--primary))" },
+                { word: heroData.titleHighlight2, color: "oklch(0.78 0.18 70)" },
+              ]}
+            />
           </h1>
 
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed mb-10 max-w-xl text-pretty">
