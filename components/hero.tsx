@@ -37,7 +37,7 @@ interface HeroProps {
 
 export function Hero({ initialHero, initialSettings }: HeroProps) {
   const { data: hero } = useHero(initialHero || undefined)
-  const { data: settings } = useSiteSettings()
+  const { data: settings } = useSiteSettings(initialSettings || undefined)
   
   const heroData = hero || defaultHero
   const socialLinks = settings?.socialLinks || defaultSocialLinks
