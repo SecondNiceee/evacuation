@@ -28,10 +28,6 @@ export function HighlightText({ text, highlights, className = '' }: HighlightTex
     .join('|')
   
   const regex = new RegExp(`(${pattern})`, 'gi')
-  
-  console.log("[v0] HighlightText - text:", text)
-  console.log("[v0] HighlightText - validHighlights:", validHighlights)
-  console.log("[v0] HighlightText - pattern:", pattern)
 
   // Split text and map highlights
   const parts = text.split(regex)
@@ -47,6 +43,15 @@ export function HighlightText({ text, highlights, className = '' }: HighlightTex
         )
 
         if (highlight) {
+          // If color is CSS variable, use className instead of inline style
+          if (highlight.color.includes('var(')) {
+            return (
+              <span key={index} className="text-primary">
+                {part}
+              </span>
+            )
+          }
+          
           return (
             <span key={index} style={{ color: highlight.color }}>
               {part}
