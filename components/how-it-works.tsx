@@ -1,7 +1,5 @@
-"use client"
-
 import { FileText } from "lucide-react"
-import { useStepsSection, useNotice } from "@/hooks/use-sanity"
+import { type SanityStepsSection, type SanityNotice } from "@/lib/sanity"
 import { getIcon } from "@/lib/icon-map"
 
 // Default data (fallback)
@@ -35,10 +33,12 @@ const defaultNotice = {
   description: "Если авто после ДТП — не пытайтесь заводить его. Пришлите фото повреждений в чат — мы подберём нужный тип платформы и согласуем работу со страховой.",
 }
 
-export function HowItWorks() {
-  const { data: stepsData } = useStepsSection()
-  const { data: noticeData } = useNotice()
+interface HowItWorksProps {
+  stepsData: SanityStepsSection | null
+  noticeData: SanityNotice | null
+}
 
+export function HowItWorks({ stepsData, noticeData }: HowItWorksProps) {
   const section = stepsData || defaultSection
   const steps = section.items || defaultSection.items
   const notice = noticeData || defaultNotice

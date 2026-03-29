@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { Menu, X, Truck } from "lucide-react"
-import { useNavbar } from "@/hooks/use-sanity"
-import { urlFor } from "@/lib/sanity"
+import { urlFor, type SanityNavbar } from "@/lib/sanity"
 
 // Default data (fallback)
 const defaultNavLinks = [
@@ -26,10 +25,13 @@ const defaultData = {
 // Convert section ID to href
 const sectionToHref = (section: string) => `#${section}`
 
-export function Navbar() {
+interface NavbarProps {
+  data: SanityNavbar | null
+}
+
+export function Navbar({ data }: NavbarProps) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const { data } = useNavbar()
 
   const navbar = data || defaultData
   const navLinks = navbar.links || defaultNavLinks

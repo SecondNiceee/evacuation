@@ -1,7 +1,5 @@
-"use client"
-
 import { Truck } from "lucide-react"
-import { useCta, useFooter, useSiteSettings } from "@/hooks/use-sanity"
+import { type SanityCta, type SanityFooter, type SanitySiteSettings } from "@/lib/sanity"
 
 // Default data (fallback)
 const defaultCta = {
@@ -20,12 +18,14 @@ const defaultSocialLinks = {
   phoneNumber: "+7-921-431-2020",
 }
 
-export function CTA() {
-  const { data: cta } = useCta()
-  const { data: settings } = useSiteSettings()
-  
-  const ctaData = cta || defaultCta
-  const socialLinks = settings?.socialLinks || defaultSocialLinks
+interface CTAProps {
+  ctaData: SanityCta | null
+  siteSettings: SanitySiteSettings | null
+}
+
+export function CTA({ ctaData, siteSettings }: CTAProps) {
+  const cta = ctaData || defaultCta
+  const socialLinks = siteSettings?.socialLinks || defaultSocialLinks
 
   return (
     <section className="py-24 bg-card">
@@ -34,10 +34,10 @@ export function CTA() {
           <Truck className="w-8 h-8 text-primary" />
         </div>
         <h2 className="font-mono font-bold text-3xl md:text-5xl text-foreground mb-4 text-balance">
-          {ctaData.title}
+          {cta.title}
         </h2>
         <p className="text-muted-foreground text-lg mb-10 text-pretty max-w-2xl mx-auto">
-          {ctaData.description}
+          {cta.description}
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <a
@@ -76,12 +76,14 @@ export function CTA() {
   )
 }
 
-export function Footer() {
-  const { data: footer } = useFooter()
-  const { data: settings } = useSiteSettings()
-  
-  const footerData = footer || defaultFooter
-  const socialLinks = settings?.socialLinks || defaultSocialLinks
+interface FooterProps {
+  footerData: SanityFooter | null
+  siteSettings: SanitySiteSettings | null
+}
+
+export function Footer({ footerData, siteSettings }: FooterProps) {
+  const footer = footerData || defaultFooter
+  const socialLinks = siteSettings?.socialLinks || defaultSocialLinks
 
   return (
     <footer className="bg-background border-t border-border py-10">
@@ -95,7 +97,7 @@ export function Footer() {
           </span>
         </div>
         <p className="text-muted-foreground text-sm">
-          {footerData.cityText}
+          {footer.cityText}
         </p>
         <div className="flex items-center gap-4">
           <a href={socialLinks.telegramUrl} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors text-sm">

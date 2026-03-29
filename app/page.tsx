@@ -1,3 +1,4 @@
+import { fetchPageData } from "@/lib/sanity"
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { Services } from "@/components/services"
@@ -9,20 +10,24 @@ import { Contacts } from "@/components/contacts"
 import { FAQ } from "@/components/faq"
 import { CTA, Footer } from "@/components/cta"
 
-export default function Page() {
+export const revalidate = 60 // Revalidate every 60 seconds
+
+export default async function Page() {
+  const data = await fetchPageData()
+
   return (
     <main className="min-h-screen bg-background">
-      <Navbar />
-      <Hero />
-      <Services />
-      <WhyUs />
-      <HowItWorks />
-      <Pricing />
-      <Zone />
-      <Contacts />
-      <FAQ />
-      <CTA />
-      <Footer />
+      <Navbar data={data.navbar} />
+      <Hero data={data.hero} siteSettings={data.siteSettings} />
+      <Services data={data.servicesSection} />
+      <WhyUs data={data.benefitsSection} />
+      <HowItWorks stepsData={data.stepsSection} noticeData={data.notice} />
+      <Pricing data={data.pricing} />
+      <Zone data={data.zone} />
+      <Contacts data={data.contactsSection} />
+      <FAQ data={data.faqSection} />
+      <CTA ctaData={data.cta} siteSettings={data.siteSettings} />
+      <Footer footerData={data.footer} siteSettings={data.siteSettings} />
     </main>
   )
 }

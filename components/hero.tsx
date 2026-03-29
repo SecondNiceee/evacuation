@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Clock } from "lucide-react"
-import { useHero, useSiteSettings } from "@/hooks/use-sanity"
-import { urlFor } from "@/lib/sanity"
+import { urlFor, type SanityHero, type SanitySiteSettings } from "@/lib/sanity"
 import { getIcon } from "@/lib/icon-map"
 import { HighlightText } from "@/components/highlight-text"
 
@@ -22,21 +21,21 @@ const defaultSocialLinks = {
   phoneNumber: "+7-921-431-2020",
 }
 
-export function Hero() {
-  const { data: hero } = useHero()
-  const { data: settings } = useSiteSettings()
+interface HeroProps {
+  data: SanityHero | null
+  siteSettings: SanitySiteSettings | null
+}
+
+export function Hero({ data: hero, siteSettings }: HeroProps) {
   const [isRevealed, setIsRevealed] = useState(false)
   
-  // Reveal animation when hero data is loaded
+  // Reveal animation when component mounts
   useEffect(() => {
-    if (hero) {
-      // Small delay to ensure smooth transition
-      const timer = setTimeout(() => setIsRevealed(true), 50)
-      return () => clearTimeout(timer)
-    }
-  }, [hero])
+    const timer = setTimeout(() => setIsRevealed(true), 50)
+    return () => clearTimeout(timer)
+  }, [])
   
-  const socialLinks = settings?.socialLinks || defaultSocialLinks
+  const socialLinks = siteSettings?.socialLinks || defaultSocialLinks
   const badges = hero?.badges || defaultBadges
 
   const heroImageUrl = hero?.heroImage ? urlFor(hero.heroImage).url() : "/images/hero-tow.jpg"

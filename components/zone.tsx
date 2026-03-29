@@ -1,9 +1,6 @@
-"use client"
-
 import Image from "next/image"
 import { MapPin } from "lucide-react"
-import { useZone } from "@/hooks/use-sanity"
-import { urlFor } from "@/lib/sanity"
+import { urlFor, type SanityZone } from "@/lib/sanity"
 
 // Default data (fallback)
 const defaultAreas = [
@@ -22,8 +19,11 @@ const defaultZone = {
   badgeSubtitle: "Среднее время подачи: 20-40 мин",
 }
 
-export function Zone() {
-  const { data } = useZone()
+interface ZoneProps {
+  data: SanityZone | null
+}
+
+export function Zone({ data }: ZoneProps) {
   const zone = data || defaultZone
   const areas = zone.areas && zone.areas.length > 0 ? zone.areas : defaultAreas
 
