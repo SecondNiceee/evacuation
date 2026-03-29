@@ -1,9 +1,6 @@
-"use client"
-
 import Image from "next/image"
 import { Car } from "lucide-react"
-import { useServicesSection } from "@/hooks/use-sanity"
-import { urlFor } from "@/lib/sanity"
+import { urlFor, type SanityServicesSection } from "@/lib/sanity"
 import { getIcon } from "@/lib/icon-map"
 
 // Default data (fallback)
@@ -46,8 +43,11 @@ const defaultSection = {
   ]
 }
 
-export function Services() {
-  const { data } = useServicesSection()
+interface ServicesProps {
+  data: SanityServicesSection | null
+}
+
+export function Services({ data }: ServicesProps) {
   const section = data || defaultSection
   const services = section.items || defaultSection.items
 

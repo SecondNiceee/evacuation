@@ -1,7 +1,5 @@
-"use client"
-
 import { Phone, Clock, Bot } from "lucide-react"
-import { useContactsSection } from "@/hooks/use-sanity"
+import { type SanityContactsSection } from "@/lib/sanity"
 
 // Platform icons
 const platformIcons = {
@@ -60,8 +58,11 @@ const ctaTextMap = {
   max: "Написать в Max →",
 }
 
-export function Contacts() {
-  const { data } = useContactsSection()
+interface ContactsProps {
+  data: SanityContactsSection | null
+}
+
+export function Contacts({ data }: ContactsProps) {
   const section = data || defaultContactsSection
   const contacts = section.contacts && section.contacts.length > 0 ? section.contacts : defaultContacts
 

@@ -1,7 +1,5 @@
-"use client"
-
 import { MessageSquare } from "lucide-react"
-import { useBenefitsSection } from "@/hooks/use-sanity"
+import { type SanityBenefitsSection } from "@/lib/sanity"
 import { getIcon } from "@/lib/icon-map"
 
 // Default data (fallback)
@@ -32,8 +30,11 @@ const defaultSection = {
   ]
 }
 
-export function WhyUs() {
-  const { data } = useBenefitsSection()
+interface WhyUsProps {
+  data: SanityBenefitsSection | null
+}
+
+export function WhyUs({ data }: WhyUsProps) {
   const section = data || defaultSection
   const benefits = section.items || defaultSection.items
 

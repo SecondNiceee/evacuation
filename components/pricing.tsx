@@ -1,6 +1,4 @@
-"use client"
-
-import { usePricing } from "@/hooks/use-sanity"
+import { type SanityPricing } from "@/lib/sanity"
 
 // Default data (fallback)
 const defaultPlans = [
@@ -53,8 +51,11 @@ const defaultPricing = {
   plans: defaultPlans,
 }
 
-export function Pricing() {
-  const { data } = usePricing()
+interface PricingProps {
+  data: SanityPricing | null
+}
+
+export function Pricing({ data }: PricingProps) {
   const pricing = data || defaultPricing
   const plans = pricing.plans && pricing.plans.length > 0 ? pricing.plans : defaultPlans
 

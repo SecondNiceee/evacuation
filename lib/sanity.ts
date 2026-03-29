@@ -211,3 +211,68 @@ export const queries = {
   navbar: `*[_id == "navbar"][0]{ ..., logoImage{ asset-> } }`,
   siteSettings: `*[_id == "siteSettings"][0]`,
 }
+
+// Server-side data fetching for all page data
+export interface PageData {
+  hero: SanityHero | null
+  servicesSection: SanityServicesSection | null
+  benefitsSection: SanityBenefitsSection | null
+  stepsSection: SanityStepsSection | null
+  notice: SanityNotice | null
+  pricing: SanityPricing | null
+  zone: SanityZone | null
+  contactsSection: SanityContactsSection | null
+  faqSection: SanityFaqSection | null
+  cta: SanityCta | null
+  footer: SanityFooter | null
+  navbar: SanityNavbar | null
+  siteSettings: SanitySiteSettings | null
+}
+
+export async function fetchPageData(): Promise<PageData> {
+  const [
+    hero,
+    servicesSection,
+    benefitsSection,
+    stepsSection,
+    notice,
+    pricing,
+    zone,
+    contactsSection,
+    faqSection,
+    cta,
+    footer,
+    navbar,
+    siteSettings,
+  ] = await Promise.all([
+    sanityClient.fetch<SanityHero>(queries.hero),
+    sanityClient.fetch<SanityServicesSection>(queries.servicesSection),
+    sanityClient.fetch<SanityBenefitsSection>(queries.benefitsSection),
+    sanityClient.fetch<SanityStepsSection>(queries.stepsSection),
+    sanityClient.fetch<SanityNotice>(queries.notice),
+    sanityClient.fetch<SanityPricing>(queries.pricing),
+    sanityClient.fetch<SanityZone>(queries.zone),
+    sanityClient.fetch<SanityContactsSection>(queries.contactsSection),
+    sanityClient.fetch<SanityFaqSection>(queries.faqSection),
+    sanityClient.fetch<SanityCta>(queries.cta),
+    sanityClient.fetch<SanityFooter>(queries.footer),
+    sanityClient.fetch<SanityNavbar>(queries.navbar),
+    sanityClient.fetch<SanitySiteSettings>(queries.siteSettings),
+  ])
+
+  return {
+    hero,
+    servicesSection,
+    benefitsSection,
+    stepsSection,
+    notice,
+    pricing,
+    zone,
+    contactsSection,
+    faqSection,
+    cta,
+    footer,
+    navbar,
+    siteSettings,
+  }
+}

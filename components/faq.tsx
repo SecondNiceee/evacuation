@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
-import { useFaqSection } from "@/hooks/use-sanity"
+import { type SanityFaqSection } from "@/lib/sanity"
 
 // Default data (fallback)
 const defaultSection = {
@@ -36,9 +36,12 @@ const defaultSection = {
   ]
 }
 
-export function FAQ() {
+interface FAQProps {
+  data: SanityFaqSection | null
+}
+
+export function FAQ({ data }: FAQProps) {
   const [open, setOpen] = useState<number | null>(null)
-  const { data } = useFaqSection()
   const section = data || defaultSection
   const faqs = section.items || defaultSection.items
 
