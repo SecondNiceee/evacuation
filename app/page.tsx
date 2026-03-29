@@ -12,12 +12,14 @@ import { CTA, Footer } from "@/components/cta"
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://155.212.138.216'
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Купить права СПб",
   "description": "Купить водительские права в Санкт-Петербурге. Все категории: A, B, C, D. Быстрое оформление без автошколы.",
-  "url": "http://155.212.138.216",
+  "url": siteUrl,
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Санкт-Петербург",
