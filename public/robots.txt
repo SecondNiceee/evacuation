@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /.next/
+Disallow: /api/
+Disallow: /_next/
+
+Sitemap: http://155.212.138.216/sitemap.xml
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
