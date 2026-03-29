@@ -12,11 +12,32 @@ import { CTA, Footer } from "@/components/cta"
 
 export const revalidate = 60 // Revalidate every 60 seconds
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Купить права СПб",
+  "description": "Купить водительские права в Санкт-Петербурге. Все категории: A, B, C, D. Быстрое оформление без автошколы.",
+  "url": "http://155.212.138.216",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Санкт-Петербург",
+    "addressCountry": "RU"
+  },
+  "areaServed": "Санкт-Петербург",
+  "priceRange": "$$",
+  "openingHours": "Mo-Su 00:00-23:59"
+}
+
 export default async function Page() {
   const data = await fetchPageData()
 
   return (
-    <main className="min-h-screen bg-background">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <main className="min-h-screen bg-background">
       <Navbar data={data.navbar} />
       <Hero data={data.hero} siteSettings={data.siteSettings} />
       <Services data={data.servicesSection} />
@@ -28,6 +49,7 @@ export default async function Page() {
       <FAQ data={data.faqSection} />
       <CTA ctaData={data.cta} siteSettings={data.siteSettings} />
       <Footer footerData={data.footer} siteSettings={data.siteSettings} />
-    </main>
+      </main>
+    </>
   )
 }
